@@ -1,0 +1,93 @@
+name: belmer
+description: A new Flutter project.
+
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.3
+
+  # Utils
+  provider: ^5.0.0
+
+  ## Bloc
+  equatable: ^2.0.0
+  bloc: ^7.0.0
+  flutter_bloc: ^7.0.0
+
+  ## form_bloc
+  form_bloc: ^0.20.1
+  flutter_form_bloc: 0.20.1
+
+  ## Firebase
+  firebase_core: ^1.1.1
+  cloud_firestore: ^2.1.0
+  firebase_auth: ^1.1.4
+
+  ## Google
+  google_sign_in: ^5.0.2
+
+  ## Animation
+  animated_button: ^0.2.0
+  flutter_sequence_animation: ^3.0.1
+  flutter_hooks: ^0.17.0
+
+  ## Icons
+  eva_icons_flutter: ^3.0.0
+
+  ## Toast
+  fluttertoast: ^8.0.6
+
+  ## ブラウザ表示
+  url_launcher: ^6.0.3
+
+  ## Package
+  package_info: ^2.0.0
+
+  ## JSON
+  json_serializable: 3.5.1
+  json_annotation: 3.1.1
+  build_runner: ^1.11.5
+
+  # Frozen Column Table
+  table_sticky_headers: ^2.0.0
+
+  # Dailog
+  awesome_dialog: ^2.1.0
+
+  # Accordion
+  expandable: ^5.0.1
+
+  # Collection
+  collection: ^1.15.0
+
+  # Fonts
+  google_fonts: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/json/
+  fonts:
+    - family: Yikes
+      fonts:
+        - asset: assets/fonts/Yikes_medium.ttf
+    - family: Kiwi Maru
+      fonts:
+        - asset: assets/fonts/KiwiMaru-Regular.ttf
+    - family: Meiryo
+      fonts:
+        - asset: assets/fonts/MEIRYO.TTC
+    - family: MyIcon
+      fonts:
+        - asset: assets/icon/MyFlutterIcon.ttf
