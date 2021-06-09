@@ -171,7 +171,8 @@ class _GithubIconButton extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
-  static const String GITHUB_PAGE_URL = "https://github.com/yakitama5";
+  static const String GITHUB_PAGE_URL =
+      "https://github.com/yakitama5/belmer/issues";
 
   @override
   Widget build(BuildContext context) {
