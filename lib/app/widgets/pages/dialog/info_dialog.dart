@@ -17,7 +17,7 @@ class InfoDialog extends StatelessWidget {
       ),
       useRootNavigator: true,
       borderSide: BorderSide(color: Theme.of(context).dividerColor, width: 2),
-      dismissOnTouchOutside: false,
+      dismissOnTouchOutside: true,
       dialogBackgroundColor: Theme.of(context).backgroundColor,
       headerAnimationLoop: false,
       width: 800,
