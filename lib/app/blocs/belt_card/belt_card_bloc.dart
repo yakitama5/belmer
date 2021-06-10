@@ -51,6 +51,8 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
         rowModelsStream: rowModelsStream,
       );
     } catch (e, stacktrace) {
+      print(e);
+      print(stacktrace);
       yield BeltCardStateFailure();
     }
   }

@@ -118,7 +118,12 @@ class BeltsCard extends StatelessWidget {
     return StreamBuilder(
       stream: state.rowModelsStream,
       builder: (_, snapshot) {
-        if (!snapshot.hasData) {
+        if (snapshot.hasError) {
+          print(snapshot.error);
+          return FailureWidget();
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return SlimeIndicator(color: Theme.of(context).backgroundColor);
         }
 

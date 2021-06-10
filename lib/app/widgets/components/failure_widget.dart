@@ -12,6 +12,7 @@ class FailureWidget extends StatelessWidget {
       style: TextStyle(
         color: accentGrey,
         fontSize: 30,
+        fontFamily: "Meiryo",
       ),
       child: Container(
         margin: EdgeInsets.all(20),
