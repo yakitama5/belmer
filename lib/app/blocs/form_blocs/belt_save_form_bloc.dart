@@ -49,12 +49,10 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
   BeltSaveFormBloc(
       {String uid,
       String beltId,
-      BeltsRepository repository,
-      List<BeltM> beltsM,
+      @required BeltsRepository repository,
+      @required List<BeltM> beltsM,
       BeltModel beltModel})
-      : assert(repository != null),
-        assert(beltsM != null),
-        _uid = uid,
+      : _uid = uid,
         _beltId = beltId,
         _repository = repository {
     // 項目定義

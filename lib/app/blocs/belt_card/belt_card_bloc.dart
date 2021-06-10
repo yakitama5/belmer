@@ -12,9 +12,8 @@ import 'package:belmer/app/utils/json_utils.dart';
 class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
   final BeltsRepository _repository;
 
-  BeltCardBloc({BeltsRepository repository})
-      : assert(repository != null),
-        _repository = repository,
+  BeltCardBloc({@required BeltsRepository repository})
+      : _repository = repository,
         super(BeltCardStatePure());
 
   @override

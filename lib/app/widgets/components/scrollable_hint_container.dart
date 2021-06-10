@@ -124,8 +124,7 @@ class _MarkPainter extends CustomPainter {
   final Color _color;
 
   _MarkPainter({@required Color color})
-      : assert(color != null),
-        _color = color,
+      : _color = color,
         super();
 
   @override

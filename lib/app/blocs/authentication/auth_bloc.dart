@@ -8,9 +8,8 @@ import 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
 
-  AuthBloc({AuthRepository repository})
-      : assert(repository != null),
-        _repository = repository,
+  AuthBloc({@required AuthRepository repository})
+      : _repository = repository,
         super(AuthStatePure());
 
   @override

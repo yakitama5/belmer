@@ -11,9 +11,8 @@ class BeltRegistPageBloc
     extends Bloc<BeltRegistPageEvent, BeltRegistPageState> {
   final BeltsRepository _repository;
 
-  BeltRegistPageBloc({BeltsRepository repository})
-      : assert(repository != null),
-        _repository = repository,
+  BeltRegistPageBloc({@required BeltsRepository repository})
+      : _repository = repository,
         super(BeltRegistPageStatePure());
 
   @override
