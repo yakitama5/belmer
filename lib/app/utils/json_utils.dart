@@ -1,10 +1,14 @@
 import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+
+const String BASE_PATH = 'json/accessory.json';
 
 class JsonUtils {
   static Future<AccessoryM> loadAccessoryJson() async {
-    String jsonString = await rootBundle.loadString('json/accessory.json');
+    String path = (kIsWeb) ? 'assets/$BASE_PATH' : BASE_PATH;
+    String jsonString = await rootBundle.loadString(path);
     return AccessoryM.fromJson(jsonDecode(jsonString));
   }
 
