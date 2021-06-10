@@ -68,8 +68,8 @@ class _Body extends StatelessWidget {
               children: [
                 Text(
                   """
-                    このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。
-                    (C) ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX All Rights Reserved.""",
+このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。
+(C) ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX All Rights Reserved.""",
                   textAlign: TextAlign.center,
                 ),
                 SpaceBox(height: 10),
