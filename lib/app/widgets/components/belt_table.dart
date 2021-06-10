@@ -75,10 +75,10 @@ class BeltTable extends StatelessWidget {
 
           // スクロール位置を保持する
           double initialScrollOffsetX = horizontalTitleController.hasClients
-              ? horizontalBodyController.offset
+              ? horizontalTitleController.offset
               : 0.0;
           double initialScrollOffsetY = verticalTitleController.hasClients
-              ? verticalBodyController.offset
+              ? verticalTitleController.offset
               : 0.0;
 
           return Container(
