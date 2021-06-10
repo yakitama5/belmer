@@ -67,7 +67,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       UserCredential userCredential = await _repository.signInWithGoogle();
       yield AuthSuccess(loginModel: _credentialToLoginModel(userCredential));
-    } catch (e) {
+    } catch (e, stacktrace) {
+      print(e);
+      print(stacktrace);
       yield AuthFialure();
     }
   }

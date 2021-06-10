@@ -193,25 +193,13 @@ class SearchPage extends StatelessWidget {
     return BlocBuilder<BeltSearchBloc, BeltSearchState>(
         builder: (context, state) {
       if (state is BeltSearchStateSuccess) {
-        // スクロール位置を保持する
-        double? initialScrollOffsetX = _horizontalBodyController.hasClients
-            ? _horizontalBodyController.offset
-            : null;
-        double? initialScrollOffsetY = _verticalBodyController.hasClients
-            ? _verticalBodyController.offset
-            : null;
-
         return SearchResultTable(
           beltRowModels: state.beltRowModels,
           columnTitles: state.columnTitles,
-          initialScrollOffsetX: initialScrollOffsetX,
-          initialScrollOffsetY: initialScrollOffsetY,
-          scrollControllers: ScrollControllers(
-            horizontalBodyController: _horizontalBodyController,
-            horizontalTitleController: _horizontalTitleController,
-            verticalBodyController: _verticalBodyController,
-            verticalTitleController: _verticalTitleController,
-          ),
+          horizontalBodyController: _horizontalBodyController,
+          horizontalTitleController: _horizontalTitleController,
+          verticalBodyController: _verticalBodyController,
+          verticalTitleController: _verticalTitleController,
           onSelectRow: (beltModel) => BeltRegistDialog.show(
             context,
             beltId: beltModel.id,

@@ -15,9 +15,10 @@ class BeltTable extends StatelessWidget {
   final CellDimensions cellDimensions;
   final double height;
   final void Function(BeltModel beltModel)? onSelectRow;
-  final ScrollControllers? scrollControllers;
-  final double? initialScrollOffsetX;
-  final double? initialScrollOffsetY;
+  final ScrollController horizontalBodyController;
+  final ScrollController horizontalTitleController;
+  final ScrollController verticalBodyController;
+  final ScrollController verticalTitleController;
   final bool showCellBorder;
   final bool showScrollableHint;
 
@@ -29,9 +30,10 @@ class BeltTable extends StatelessWidget {
     required this.cellDimensions,
     required this.height,
     this.onSelectRow,
-    this.scrollControllers,
-    this.initialScrollOffsetX,
-    this.initialScrollOffsetY,
+    required this.horizontalBodyController,
+    required this.horizontalTitleController,
+    required this.verticalBodyController,
+    required this.verticalTitleController,
     this.showCellBorder = false,
     this.showScrollableHint = false,
   }) : super(key: key);
@@ -71,6 +73,14 @@ class BeltTable extends StatelessWidget {
             });
           }
 
+          // スクロール位置を保持する
+          double initialScrollOffsetX = horizontalBodyController.hasClients
+              ? horizontalBodyController.offset
+              : 0.0;
+          double initialScrollOffsetY = verticalBodyController.hasClients
+              ? verticalBodyController.offset
+              : 0.0;
+
           return Container(
             height: height,
             width: double.infinity,
@@ -80,9 +90,14 @@ class BeltTable extends StatelessWidget {
               child: StickyHeadersTable(
                 key: key,
                 // スクロール制御
-                scrollControllers: scrollControllers,
-                initialScrollOffsetX: initialScrollOffsetX ?? 0.0,
-                initialScrollOffsetY: initialScrollOffsetY ?? 0.0,
+                scrollControllers: ScrollControllers(
+                  horizontalBodyController: horizontalBodyController,
+                  horizontalTitleController: horizontalTitleController,
+                  verticalBodyController: verticalBodyController,
+                  verticalTitleController: verticalTitleController,
+                ),
+                initialScrollOffsetX: initialScrollOffsetX,
+                initialScrollOffsetY: initialScrollOffsetY,
 
                 // テーブルスタイル設定
                 columnsLength: columnTitles.length,

@@ -12,7 +12,10 @@ class SummaryTable extends StatelessWidget {
   final List<EffectModel> _columnTitleModels;
   final List<BeltRowModel>? _rowModels;
   final void Function(BeltModel beltModel)? onSelectRow;
-  final ScrollControllers? scrollControllers;
+  final ScrollController horizontalBodyController;
+  final ScrollController horizontalTitleController;
+  final ScrollController verticalBodyController;
+  final ScrollController verticalTitleController;
   final double? initialScrollOffsetX;
   final double? initialScrollOffsetY;
   final bool showScrollableHint;
@@ -21,7 +24,10 @@ class SummaryTable extends StatelessWidget {
     Key? key,
     required List<EffectModel> columnTitleModels,
     List<BeltRowModel>? rowModels,
-    this.scrollControllers,
+    required this.horizontalBodyController,
+    required this.horizontalTitleController,
+    required this.verticalBodyController,
+    required this.verticalTitleController,
     this.onSelectRow,
     this.initialScrollOffsetX = 0.0,
     this.initialScrollOffsetY = 0.0,
@@ -44,7 +50,10 @@ class SummaryTable extends StatelessWidget {
           contentCellHeight: 60,
           stickyLegendWidth: 180,
           stickyLegendHeight: 60),
-      scrollControllers: scrollControllers,
+      horizontalBodyController: horizontalBodyController,
+      horizontalTitleController: horizontalTitleController,
+      verticalBodyController: verticalBodyController,
+      verticalTitleController: verticalTitleController,
       key: key,
       onSelectRow: onSelectRow,
       initialScrollOffsetX: initialScrollOffsetX,
@@ -64,7 +73,10 @@ class _SummaryBeltTable extends BeltTable {
     required CellDimensions cellDimensions,
     required double height,
     void Function(BeltModel beltModel)? onSelectRow,
-    ScrollControllers? scrollControllers,
+    required ScrollController horizontalBodyController,
+    required ScrollController horizontalTitleController,
+    required ScrollController verticalBodyController,
+    required ScrollController verticalTitleController,
     double? initialScrollOffsetX,
     double? initialScrollOffsetY,
     bool showScrollableHint = false,
@@ -76,9 +88,10 @@ class _SummaryBeltTable extends BeltTable {
           cellDimensions: cellDimensions,
           height: height,
           onSelectRow: onSelectRow,
-          scrollControllers: scrollControllers,
-          initialScrollOffsetX: initialScrollOffsetX,
-          initialScrollOffsetY: initialScrollOffsetY,
+          horizontalBodyController: horizontalBodyController,
+          horizontalTitleController: horizontalTitleController,
+          verticalBodyController: verticalBodyController,
+          verticalTitleController: verticalTitleController,
           showScrollableHint: showScrollableHint,
         );
 

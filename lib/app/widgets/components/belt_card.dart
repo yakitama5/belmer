@@ -128,23 +128,11 @@ class BeltsCard extends StatelessWidget {
           return SlimeIndicator(color: Theme.of(context).backgroundColor);
         }
 
-        // スクロール位置を保持する
-        double? initialScrollOffsetX = _horizontalBodyController.hasClients
-            ? _horizontalBodyController.offset
-            : null;
-        double? initialScrollOffsetY = _verticalBodyController.hasClients
-            ? _verticalBodyController.offset
-            : null;
-
         return SummaryTable(
-          scrollControllers: ScrollControllers(
-            horizontalBodyController: _horizontalBodyController,
-            horizontalTitleController: _horizontalTitleController,
-            verticalBodyController: _verticalBodyController,
-            verticalTitleController: _verticalTitleController,
-          ),
-          initialScrollOffsetX: initialScrollOffsetX,
-          initialScrollOffsetY: initialScrollOffsetY,
+          horizontalBodyController: _horizontalBodyController,
+          horizontalTitleController: _horizontalTitleController,
+          verticalBodyController: _verticalBodyController,
+          verticalTitleController: _verticalTitleController,
           onSelectRow: (beltModel) =>
               BeltRegistDialog.show(context, beltId: beltModel.id),
           columnTitleModels: state.columnTitleModels,
