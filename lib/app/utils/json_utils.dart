@@ -2,7 +2,7 @@ import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:flutter/services.dart';
 
-const String BASE_PATH = 'json/accessory.json';
+const String BASE_PATH = 'assets/json/accessory.json';
 
 class JsonUtils {
   static Future<AccessoryM> loadAccessoryJson() async {
