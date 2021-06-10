@@ -14,7 +14,10 @@ class BeltCardStateSuccess extends BeltCardState {
   final List<EffectModel> columnTitleModels;
   final Stream<List<BeltRowModel>> rowModelsStream;
 
-  BeltCardStateSuccess({this.columnTitleModels, this.rowModelsStream});
+  BeltCardStateSuccess({
+    required this.columnTitleModels,
+    required this.rowModelsStream,
+  });
 }
 
 class BeltCardStateProgress extends BeltCardState {}

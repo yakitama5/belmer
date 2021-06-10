@@ -8,5 +8,5 @@ class SortEvent extends Equatable {
 class SortEventSort extends SortEvent {
   final int columnIndex;
 
-  SortEventSort({this.columnIndex});
+  SortEventSort({required this.columnIndex});
 }

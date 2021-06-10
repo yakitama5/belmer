@@ -3,7 +3,7 @@ import 'package:belmer/app/utils/importer.dart';
 class ItemizedText extends StatelessWidget {
   const ItemizedText(
     this.texts, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final List<Text> texts;
@@ -23,7 +23,7 @@ class ItemizedText extends StatelessWidget {
 class _ItemizedTextRow extends StatelessWidget {
   const _ItemizedTextRow(
     this.text, {
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Text text;

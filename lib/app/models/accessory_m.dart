@@ -4,13 +4,14 @@ part 'accessory_m.g.dart';
 @JsonSerializable()
 class EffectModel {
   EffectModel({
-    this.id,
-    this.groupName,
-    this.groupShortName,
-    this.name,
-    this.value,
-    this.maxFlag,
-    this.listDispFlag,
+    required this.id,
+    required this.groupName,
+    required this.groupShortName,
+    required this.name,
+    required this.value,
+    required this.sortKey,
+    required this.maxFlag,
+    required this.listDispFlag,
   });
 
   String id;

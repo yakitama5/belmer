@@ -6,15 +6,15 @@ import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SearchResultTable extends StatelessWidget {
   final List<String> columnTitles;
-  final List<BeltRowModel> beltRowModels;
-  final ScrollControllers scrollControllers;
-  final void Function(BeltModel beltModel) onSelectRow;
-  final double initialScrollOffsetX;
-  final double initialScrollOffsetY;
+  final List<BeltRowModel>? beltRowModels;
+  final ScrollControllers? scrollControllers;
+  final void Function(BeltModel beltModel)? onSelectRow;
+  final double? initialScrollOffsetX;
+  final double? initialScrollOffsetY;
 
   const SearchResultTable({
-    Key key,
-    this.columnTitles,
+    Key? key,
+    required this.columnTitles,
     this.beltRowModels,
     this.scrollControllers,
     this.onSelectRow,

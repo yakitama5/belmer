@@ -5,11 +5,11 @@ import 'package:belmer/app/utils/importer.dart';
 class BeltsFirebaseRepository extends BeltsRepository {
   final FirebaseFirestore _firestore;
 
-  BeltsFirebaseRepository({FirebaseFirestore firestore})
+  BeltsFirebaseRepository({FirebaseFirestore? firestore})
       : this._firestore = firestore ?? FirebaseFirestore.instance;
 
   @override
-  Stream<List<BeltModel>> fetchByUserId(String userId) {
+  Stream<List<BeltModel>> fetchByUserId(String? userId) {
     return _firestore
         .collection("users")
         .doc(userId)
@@ -20,7 +20,7 @@ class BeltsFirebaseRepository extends BeltsRepository {
   }
 
   @override
-  Future<void> save(String userId, BeltModel belt) async {
+  Future<void> save(String? userId, BeltModel belt) async {
     CollectionReference beltsCol =
         _firestore.collection("users").doc(userId).collection("belts");
 
@@ -35,18 +35,18 @@ class BeltsFirebaseRepository extends BeltsRepository {
   }
 
   @override
-  Future<BeltModel> selectById(String userId, String beltId) {
+  Future<BeltModel> selectById(String? userId, String? beltId) {
     return _firestore
         .collection("users")
         .doc(userId)
         .collection("belts")
         .doc(beltId)
         .get()
-        .then((doc) => BeltModel.fromJson(doc.data()));
+        .then((doc) => BeltModel.fromJson(doc.data()!));
   }
 
   @override
-  Future<void> delete(String userId, String beltId) {
+  Future<void> delete(String? userId, String? beltId) {
     return _firestore
         .collection("users")
         .doc(userId)
@@ -56,7 +56,7 @@ class BeltsFirebaseRepository extends BeltsRepository {
   }
 
   @override
-  Future<List<BeltModel>> selectByUserId(String userId) {
+  Future<List<BeltModel>> selectByUserId(String? userId) {
     return _firestore
         .collection("users")
         .doc(userId)

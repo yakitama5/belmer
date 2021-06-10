@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:belmer/app/blocs/belt_regist_page/belt_regist_page_importer.dart';
 import 'package:belmer/app/blocs/form_blocs/belt_save_form_bloc.dart';
@@ -13,14 +11,14 @@ import 'package:belmer/app/widgets/pages/dialog/dqx_progress_dialog.dart';
 import 'package:flutter/foundation.dart';
 
 class BeltRegistDialog extends StatelessWidget {
-  final String beltId;
-  final void Function() onUpdated;
+  final String? beltId;
+  final void Function()? onUpdated;
 
-  const BeltRegistDialog({Key key, this.beltId, this.onUpdated})
+  const BeltRegistDialog({Key? key, this.beltId, this.onUpdated})
       : super(key: key);
 
   static void show(BuildContext context,
-      {Key key, String beltId, void Function() onUpdated}) {
+      {Key? key, String? beltId, void Function()? onUpdated}) {
     // ダイアログはRoot配下に所属するため、Provider.valueで引き渡し
     // Notes: https://qiita.com/popy1017/items/f4c6f6167dde4aa206ef#%E3%81%A9%E3%81%86%E3%81%99%E3%82%8B%E3%81%8B
     LoginModel loginModel = context.read<LoginModel>();
@@ -226,7 +224,7 @@ class BeltRegistDialog extends StatelessWidget {
     DqxProgressDialog.hide(context);
     Navigator.pop(context);
     if (onUpdated != null) {
-      onUpdated();
+      onUpdated!();
     }
   }
 
@@ -242,12 +240,12 @@ class BeltRegistDialog extends StatelessWidget {
 class _MyElevatedButton extends StatelessWidget {
   final void Function() onPressed;
   final Widget child;
-  final ButtonStyle style;
+  final ButtonStyle? style;
 
   const _MyElevatedButton({
-    Key key,
-    @required this.onPressed,
-    @required this.child,
+    Key? key,
+    required this.onPressed,
+    required this.child,
     this.style,
   }) : super(key: key);
 
@@ -266,7 +264,7 @@ class _MyElevatedButton extends StatelessWidget {
 }
 
 class _SubmitButton extends StatelessWidget {
-  const _SubmitButton({Key key}) : super(key: key);
+  const _SubmitButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -278,7 +276,7 @@ class _SubmitButton extends StatelessWidget {
 }
 
 class _DeleteButton extends StatelessWidget {
-  const _DeleteButton({Key key}) : super(key: key);
+  const _DeleteButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -294,7 +292,7 @@ class _DeleteButton extends StatelessWidget {
 }
 
 class _CancelButton extends StatelessWidget {
-  const _CancelButton({Key key}) : super(key: key);
+  const _CancelButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -319,11 +317,11 @@ class _MyDropDownField extends StatelessWidget {
   final String Function(BuildContext context, dynamic obj) itemBuilder;
 
   const _MyDropDownField({
-    Key key,
-    this.selectFieldBloc,
+    Key? key,
+    required this.selectFieldBloc,
     this.showEmptyItem = true,
-    this.labelText,
-    this.itemBuilder,
+    required this.labelText,
+    required this.itemBuilder,
   }) : super(key: key);
 
   @override
@@ -346,10 +344,10 @@ class _MyTextField extends StatelessWidget {
   final int maxLength;
 
   const _MyTextField({
-    Key key,
-    this.textFieldBloc,
-    this.labelText,
-    this.maxLength,
+    Key? key,
+    required this.textFieldBloc,
+    required this.labelText,
+    required this.maxLength,
   }) : super(key: key);
 
   @override
@@ -368,7 +366,7 @@ class _MyTextField extends StatelessWidget {
       ),
       cursorColor: Theme.of(context).accentColor,
       buildCounter: (BuildContext context,
-              {int currentLength, int maxLength, bool isFocused}) =>
+              {int? currentLength, int? maxLength, required bool isFocused}) =>
           isFocused
               ? Text(
                   '$currentLength/$maxLength ',

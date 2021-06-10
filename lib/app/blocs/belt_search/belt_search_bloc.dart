@@ -5,6 +5,7 @@ import 'package:belmer/app/models/belt_table_model.dart';
 import 'package:belmer/app/models/belts.dart';
 import 'package:belmer/app/repositories/belts_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 
 class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
   final BeltsRepository _repository;
@@ -20,9 +21,9 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
   ];
 
   BeltSearchBloc(
-      {BeltSearchState initialState,
-      @required BeltsRepository repository,
-      List<BeltM> beltM})
+      {BeltSearchState? initialState,
+      required BeltsRepository repository,
+      required List<BeltM> beltM})
       : _repository = repository,
         _beltM = beltM,
         super(initialState ?? BeltSearchStatePure());
@@ -48,7 +49,7 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
         beltRowModels: beltRowModels,
         columnTitles: COLUMN_TITLES,
       );
-    } catch (e, stacktrace) {
+    } catch (e) {
       yield BeltSearchStateFailure();
     }
   }
@@ -56,7 +57,7 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
   Future<List<BeltModel>> select(BeltSearchEventSearch event) async {
     List<BeltModel> beltModels = await _repository.selectByUserId(event.userId);
 
-    List<String> effectIds = [];
+    List<String?> effectIds = [];
     if (event.effectId != null) {
       effectIds.add(event.effectId);
     } else if (event.effectGroupName != null) {
@@ -74,7 +75,7 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
           event.beltType == null || event.beltType == belt.type;
 
       // 効果種類・効果値
-      List<String> beltEffects = [
+      List<String?> beltEffects = [
         belt.effect1,
         belt.effect2,
         belt.effect3,
@@ -85,11 +86,11 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
           effectIds.isEmpty || beltEffects.any((e) => effectIds.contains(e));
 
       // メモ
-      bool isMemoMatch = event.memo == null || belt.memo.contains(event.memo);
+      bool isMemoMatch = event.memo == null || belt.memo!.contains(event.memo!);
 
       // 倉庫
       bool isWarehouseMatch =
-          event.warehouse == null || belt.location.contains(event.warehouse);
+          event.warehouse == null || belt.location!.contains(event.warehouse!);
 
       return isBeltTypeMatch &&
           isEffectMatch &&
@@ -101,7 +102,7 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
   List<BeltRowModel> toBeltRowModels(List<BeltModel> beltModels) {
     return beltModels.map((belt) {
       List<BeltCellModel> cells = COLUMN_TITLES.mapIndexed((index, item) {
-        String value;
+        String value = "";
         switch (index) {
           case 0:
             value = toBeltTypeName(belt.type);
@@ -122,7 +123,7 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
             value = toEffectName(belt.effect5);
             break;
           case 6:
-            value = belt.location;
+            value = belt.location ?? "";
             break;
           default:
         }
@@ -135,30 +136,29 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
 
       return BeltRowModel(
         beltModel: belt,
-        legendCellValue: belt.memo,
+        legendCellValue: belt.memo ?? "",
         cells: cells,
       );
     }).toList();
   }
 
-  String toEffectName(String effectId) {
+  String toEffectName(String? effectId) {
     if (effectId == null) {
       return "";
     }
 
     return _beltM
-        .expand((beltM) => beltM.effects)
-        .firstWhere((effect) => effect.id == effectId, orElse: () => null)
-        ?.name;
+            .expand((beltM) => beltM.effects)
+            .firstWhereOrNull((effect) => effect.id == effectId)
+            ?.name ??
+        "";
   }
 
-  String toBeltTypeName(String beltId) {
+  String toBeltTypeName(String? beltId) {
     if (beltId == null) {
       return "";
     }
 
-    return _beltM
-        .firstWhere((beltM) => beltM.id == beltId, orElse: () => null)
-        ?.name;
+    return _beltM.firstWhereOrNull((beltM) => beltM.id == beltId)?.name ?? "";
   }
 }

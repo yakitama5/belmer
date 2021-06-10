@@ -12,9 +12,9 @@ class BeltRegistPageStatePure extends BeltRegistPageState {}
 
 class BeltRegistPageStateSuccess extends BeltRegistPageState {
   final List<BeltM> beltM;
-  final BeltModel beltModel;
+  final BeltModel? beltModel;
 
-  BeltRegistPageStateSuccess({this.beltM, this.beltModel});
+  BeltRegistPageStateSuccess({required this.beltM, this.beltModel});
 }
 
 class BeltRegistPageStateProgress extends BeltRegistPageState {}

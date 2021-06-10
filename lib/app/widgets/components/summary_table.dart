@@ -10,17 +10,17 @@ import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SummaryTable extends StatelessWidget {
   final List<EffectModel> _columnTitleModels;
-  final List<BeltRowModel> _rowModels;
-  final void Function(BeltModel beltModel) onSelectRow;
-  final ScrollControllers scrollControllers;
-  final double initialScrollOffsetX;
-  final double initialScrollOffsetY;
+  final List<BeltRowModel>? _rowModels;
+  final void Function(BeltModel beltModel)? onSelectRow;
+  final ScrollControllers? scrollControllers;
+  final double? initialScrollOffsetX;
+  final double? initialScrollOffsetY;
   final bool showScrollableHint;
 
   SummaryTable({
-    Key key,
-    @required List<EffectModel> columnTitleModels,
-    @required List<BeltRowModel> rowModels,
+    Key? key,
+    required List<EffectModel> columnTitleModels,
+    List<BeltRowModel>? rowModels,
     this.scrollControllers,
     this.onSelectRow,
     this.initialScrollOffsetX = 0.0,
@@ -58,16 +58,16 @@ class _SummaryBeltTable extends BeltTable {
   static const String LEGEND_CELL_TITLE = "メモ";
 
   const _SummaryBeltTable({
-    Key key,
-    @required List<String> columnTitles,
-    @required List<BeltRowModel> rowModels,
-    @required CellDimensions cellDimensions,
-    @required double height,
-    void Function(BeltModel beltModel) onSelectRow,
-    ScrollControllers scrollControllers,
-    double initialScrollOffsetX,
-    double initialScrollOffsetY,
-    bool showScrollableHint,
+    Key? key,
+    required List<String> columnTitles,
+    required List<BeltRowModel>? rowModels,
+    required CellDimensions cellDimensions,
+    required double height,
+    void Function(BeltModel beltModel)? onSelectRow,
+    ScrollControllers? scrollControllers,
+    double? initialScrollOffsetX,
+    double? initialScrollOffsetY,
+    bool showScrollableHint = false,
   }) : super(
           key: key,
           legendCellTitle: LEGEND_CELL_TITLE,
@@ -84,8 +84,8 @@ class _SummaryBeltTable extends BeltTable {
 
   @override
   Widget generateContentsCell(int columnIndex, int rowIndex) {
-    BeltCellModel cellModel = rowModels[rowIndex]?.cells[columnIndex];
-    SummaryBeltCellModel summaryCellModel = cellModel as SummaryBeltCellModel;
+    BeltCellModel? cellModel = rowModels![rowIndex].cells[columnIndex];
+    SummaryBeltCellModel? summaryCellModel = cellModel as SummaryBeltCellModel?;
 
     return MyTableContentsCell(
         child: summaryCellModel != null

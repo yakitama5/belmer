@@ -5,8 +5,8 @@ import 'package:belmer/app/widgets/components/space_box.dart';
 class FailureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final Color accentGrey = Colors.grey[600];
-    final Color primaryGrey = Colors.grey[100];
+    final Color accentGrey = Colors.grey[600]!;
+    final Color? primaryGrey = Colors.grey[100];
 
     return DefaultTextStyle(
       style: TextStyle(

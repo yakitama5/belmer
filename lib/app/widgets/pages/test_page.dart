@@ -72,9 +72,9 @@ class _Hoge extends HookWidget {
 }
 
 class _MarkPainter extends CustomPainter {
-  final Color _color;
+  final Color? _color;
 
-  _MarkPainter({@required Color color})
+  _MarkPainter({required Color? color})
       : _color = color,
         super();
 
@@ -95,7 +95,7 @@ class _MarkPainter extends CustomPainter {
     final Offset lineFrom = Offset(widthCenter - 35, heightCenter);
     final Offset lineTo = Offset(widthCenter + 35, heightCenter);
     final linePaint = Paint()
-      ..color = _color
+      ..color = _color!
       ..strokeCap = StrokeCap.square
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8;
@@ -107,7 +107,7 @@ class _MarkPainter extends CustomPainter {
     final double heightCenter = size.height / 2;
 
     final paint = Paint()
-      ..color = _color
+      ..color = _color!
       ..strokeCap = StrokeCap.square;
 
     // 横線

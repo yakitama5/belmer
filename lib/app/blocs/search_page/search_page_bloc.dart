@@ -5,7 +5,7 @@ import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/utils/json_utils.dart';
 
 class SearchPageBloc extends Bloc<SearchPageEvent, SearchPageState> {
-  SearchPageBloc({SearchPageState initialState})
+  SearchPageBloc({SearchPageState? initialState})
       : super(initialState ?? SearchPageStatePure());
 
   @override

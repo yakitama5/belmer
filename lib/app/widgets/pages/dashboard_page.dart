@@ -4,7 +4,7 @@ import 'package:belmer/app/widgets/components/belt_card.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key key}) : super(key: key);
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

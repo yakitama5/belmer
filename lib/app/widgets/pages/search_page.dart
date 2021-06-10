@@ -22,7 +22,7 @@ class SearchPage extends StatelessWidget {
   final ScrollController _verticalBodyController = ScrollController();
   final ScrollController _verticalTitleController = ScrollController();
 
-  SearchPage({Key key}) : super(key: key);
+  SearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -194,10 +194,10 @@ class SearchPage extends StatelessWidget {
         builder: (context, state) {
       if (state is BeltSearchStateSuccess) {
         // スクロール位置を保持する
-        double initialScrollOffsetX = _horizontalBodyController.hasClients
+        double? initialScrollOffsetX = _horizontalBodyController.hasClients
             ? _horizontalBodyController.offset
             : null;
-        double initialScrollOffsetY = _verticalBodyController.hasClients
+        double? initialScrollOffsetY = _verticalBodyController.hasClients
             ? _verticalBodyController.offset
             : null;
 
@@ -252,11 +252,11 @@ class _SearchCondDropDownField extends StatelessWidget {
   final String Function(BuildContext context, dynamic obj) itemBuilder;
 
   const _SearchCondDropDownField({
-    Key key,
-    this.selectFieldBloc,
+    Key? key,
+    required this.selectFieldBloc,
     this.showEmptyItem = true,
-    this.labelText,
-    this.itemBuilder,
+    required this.labelText,
+    required this.itemBuilder,
   }) : super(key: key);
 
   @override
@@ -283,9 +283,9 @@ class _SearchCondTextField extends StatelessWidget {
   final String labelText;
 
   const _SearchCondTextField({
-    Key key,
-    this.textFieldBloc,
-    this.labelText,
+    Key? key,
+    required this.textFieldBloc,
+    required this.labelText,
   }) : super(key: key);
 
   @override

@@ -13,9 +13,10 @@ EffectModel _$EffectModelFromJson(Map<String, dynamic> json) {
     groupShortName: json['groupShortName'] as String,
     name: json['name'] as String,
     value: json['value'] as String,
+    sortKey: json['sortKey'] as int,
     maxFlag: json['maxFlag'] as bool,
     listDispFlag: json['listDispFlag'] as bool,
-  )..sortKey = json['sortKey'] as int;
+  );
 }
 
 Map<String, dynamic> _$EffectModelToJson(EffectModel instance) =>
@@ -34,29 +35,27 @@ BeltM _$BeltMFromJson(Map<String, dynamic> json) {
   return BeltM(
     json['id'] as String,
     json['name'] as String,
-    (json['effects'] as List)
-        ?.map((e) =>
-            e == null ? null : EffectModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['effects'] as List<dynamic>)
+        .map((e) => EffectModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$BeltMToJson(BeltM instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'effects': instance.effects?.map((e) => e?.toJson())?.toList(),
+      'effects': instance.effects.map((e) => e.toJson()).toList(),
     };
 
 AccessoryM _$AccessoryMFromJson(Map<String, dynamic> json) {
   return AccessoryM(
-    (json['belts'] as List)
-        ?.map(
-            (e) => e == null ? null : BeltM.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    (json['belts'] as List<dynamic>)
+        .map((e) => BeltM.fromJson(e as Map<String, dynamic>))
+        .toList(),
   );
 }
 
 Map<String, dynamic> _$AccessoryMToJson(AccessoryM instance) =>
     <String, dynamic>{
-      'belts': instance.belts?.map((e) => e?.toJson())?.toList(),
+      'belts': instance.belts.map((e) => e.toJson()).toList(),
     };

@@ -18,8 +18,8 @@ void main() async {
   runApp(App());
 }
 
-String _formBlocErrorBuilder(
-    BuildContext context, String error, FieldBloc fieldBloc) {
+String? _formBlocErrorBuilder(
+    BuildContext context, String? error, FieldBloc fieldBloc) {
   switch (error) {
     case FieldBlocValidatorsErrors.required:
       if (fieldBloc is MultiSelectFieldBloc || fieldBloc is SelectFieldBloc) {

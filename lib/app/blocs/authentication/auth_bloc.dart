@@ -8,7 +8,7 @@ import 'auth_state.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _repository;
 
-  AuthBloc({@required AuthRepository repository})
+  AuthBloc({required AuthRepository repository})
       : _repository = repository,
         super(AuthStatePure());
 
@@ -37,8 +37,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     if (isSignIn) {
       // ユーザー情報の取得
-      final User user = await _repository.getCurrentUser();
-      yield AuthSuccess(loginModel: _userToLoginModel(user));
+      final User? user = await _repository.getCurrentUser();
+      yield AuthSuccess(loginModel: _userToLoginModel(user!));
     } else {
       yield NotAuth();
     }
@@ -53,7 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       UserCredential userCredential = await _repository.signInAnonymously();
       yield AuthSuccess(loginModel: _credentialToLoginModel(userCredential));
-    } catch (e, stackTrace) {
+    } catch (e) {
       yield AuthFialure();
     }
   }
@@ -67,7 +67,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       UserCredential userCredential = await _repository.signInWithGoogle();
       yield AuthSuccess(loginModel: _credentialToLoginModel(userCredential));
-    } catch (e, stackTrace) {
+    } catch (e) {
       yield AuthFialure();
     }
   }
@@ -96,12 +96,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   LoginModel _credentialToLoginModel(UserCredential userCredential) {
-    return _userToLoginModel(userCredential?.user);
+    return _userToLoginModel(userCredential.user!);
   }
 
   LoginModel _userToLoginModel(User user) {
     return LoginModel(
-      uid: user?.uid,
+      uid: user.uid,
     );
   }
 }

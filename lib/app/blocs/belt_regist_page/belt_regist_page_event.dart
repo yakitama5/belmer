@@ -7,8 +7,8 @@ abstract class BeltRegistPageEvent extends Equatable {
 }
 
 class BeltRegistPageEventInit extends BeltRegistPageEvent {
-  final String userId;
-  final String beltId;
+  final String? userId;
+  final String? beltId;
 
-  BeltRegistPageEventInit({@required this.userId, this.beltId});
+  BeltRegistPageEventInit({required this.userId, this.beltId});
 }
