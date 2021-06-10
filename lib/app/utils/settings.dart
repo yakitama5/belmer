@@ -12,10 +12,10 @@ const FIREBASE_OPTIONS = const FirebaseOptions(
 );
 
 const APP_NAME = "dqx-belt-manager";
-const FIREBASE_API_KEY = "AIzaSyCcoDMOCwmKfCQRjjuISPH3VJY6hoEM7Tk";
-const FIREBASE_AUTH_DOMAIN = "dqx-belt-manager.firebaseapp.com";
-const FIREBASE_PROJECT_ID = "dqx-belt-manager";
-const FIREBASE_STORAGE_BUCKET = "dqx-belt-manager.appspot.com";
-const FIREBASE_MESSAGING_SENDER_ID = "937203067946";
-const FIREBASE_APP_ID = "1:937203067946:web:edcd52e5da7c76fe00a753";
-const FIREBASE_MEASUREMENT_ID = "G-0VEBCSS67X";
+const FIREBASE_API_KEY = "AIzaSyD5r0BbIAMRmGj7LpEqEHS_8vICU9bfX78";
+const FIREBASE_AUTH_DOMAIN = "belmer-71509.firebaseapp.com";
+const FIREBASE_PROJECT_ID = "belmer-71509";
+const FIREBASE_STORAGE_BUCKET = "belmer-71509.appspot.com";
+const FIREBASE_MESSAGING_SENDER_ID = "941823587021";
+const FIREBASE_APP_ID = "1:941823587021:web:e97eacba6d16e3e8d42f84";
+const FIREBASE_MEASUREMENT_ID = "G-E3ZM338W9W";
