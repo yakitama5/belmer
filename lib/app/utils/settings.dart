@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 const FIREBASE_OPTIONS = const FirebaseOptions(
   apiKey: FIREBASE_API_KEY,
   authDomain: FIREBASE_AUTH_DOMAIN,
+  databaseURL: 'https://belmer-71509.firebaseapp.com',
   projectId: FIREBASE_PROJECT_ID,
   storageBucket: FIREBASE_STORAGE_BUCKET,
   messagingSenderId: FIREBASE_MESSAGING_SENDER_ID,
