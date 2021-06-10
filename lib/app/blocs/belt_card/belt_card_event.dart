@@ -7,8 +7,8 @@ abstract class BeltCardEvent extends Equatable {
 }
 
 class BeltCardEventLoad extends BeltCardEvent {
-  final String userId;
-  final String beltType;
+  final String? userId;
+  final String? beltType;
 
-  BeltCardEventLoad({@required this.userId, this.beltType});
+  BeltCardEventLoad({required this.userId, this.beltType});
 }

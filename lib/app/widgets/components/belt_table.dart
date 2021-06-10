@@ -9,29 +9,31 @@ import 'package:belmer/app/widgets/components/scrollable_hint_container.dart';
 import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class BeltTable extends StatelessWidget {
-  final String legendCellTitle;
+  final String? legendCellTitle;
   final List<String> columnTitles;
-  final List<BeltRowModel> rowModels;
+  final List<BeltRowModel>? rowModels;
   final CellDimensions cellDimensions;
   final double height;
-  final void Function(BeltModel beltModel) onSelectRow;
-  final ScrollControllers scrollControllers;
-  final double initialScrollOffsetX;
-  final double initialScrollOffsetY;
+  final void Function(BeltModel beltModel)? onSelectRow;
+  final ScrollController horizontalBodyController;
+  final ScrollController horizontalTitleController;
+  final ScrollController verticalBodyController;
+  final ScrollController verticalTitleController;
   final bool showCellBorder;
   final bool showScrollableHint;
 
   const BeltTable({
-    Key key,
+    Key? key,
     this.legendCellTitle,
-    @required this.columnTitles,
-    @required this.rowModels,
-    @required this.cellDimensions,
-    @required this.height,
+    required this.columnTitles,
+    required this.rowModels,
+    required this.cellDimensions,
+    required this.height,
     this.onSelectRow,
-    this.scrollControllers,
-    this.initialScrollOffsetX,
-    this.initialScrollOffsetY,
+    required this.horizontalBodyController,
+    required this.horizontalTitleController,
+    required this.verticalBodyController,
+    required this.verticalTitleController,
     this.showCellBorder = false,
     this.showScrollableHint = false,
   }) : super(key: key);
@@ -44,20 +46,20 @@ class BeltTable extends StatelessWidget {
         builder: (context) =>
             BlocBuilder<SortBloc, SortState>(builder: (context, state) {
           // リストのソート
-          int sortColumnIndex;
-          bool isReverse;
+          int? sortColumnIndex;
+          bool? isReverse;
           if (state is SortStateSorted) {
             sortColumnIndex = state.columnIndex;
             isReverse = state.isReverse;
 
-            rowModels.sort((a, b) {
-              int sortKeyA = a.cells[sortColumnIndex]?.sortKey ?? -1;
+            rowModels?.sort((a, b) {
+              int sortKeyA = a.cells[sortColumnIndex!]?.sortKey ?? -1;
               int sortKeyB = b.cells[sortColumnIndex]?.sortKey ?? -1;
 
               String valueA = a.cells[sortColumnIndex]?.value ?? "";
               String valueB = b.cells[sortColumnIndex]?.value ?? "";
 
-              int compareResult = isReverse
+              int compareResult = isReverse!
                   ? sortKeyA.compareTo(sortKeyB)
                   : sortKeyB.compareTo(sortKeyA);
 
@@ -71,6 +73,14 @@ class BeltTable extends StatelessWidget {
             });
           }
 
+          // スクロール位置を保持する
+          double initialScrollOffsetX = horizontalBodyController.hasClients
+              ? horizontalBodyController.offset
+              : 0.0;
+          double initialScrollOffsetY = verticalBodyController.hasClients
+              ? verticalBodyController.offset
+              : 0.0;
+
           return Container(
             height: height,
             width: double.infinity,
@@ -80,13 +90,18 @@ class BeltTable extends StatelessWidget {
               child: StickyHeadersTable(
                 key: key,
                 // スクロール制御
-                scrollControllers: scrollControllers ?? null,
+                scrollControllers: ScrollControllers(
+                  horizontalBodyController: horizontalBodyController,
+                  horizontalTitleController: horizontalTitleController,
+                  verticalBodyController: verticalBodyController,
+                  verticalTitleController: verticalTitleController,
+                ),
                 initialScrollOffsetX: initialScrollOffsetX,
                 initialScrollOffsetY: initialScrollOffsetY,
 
                 // テーブルスタイル設定
                 columnsLength: columnTitles.length,
-                rowsLength: rowModels.length,
+                rowsLength: rowModels?.length ?? 0,
                 cellDimensions: cellDimensions,
 
                 // 各セル生成
@@ -98,7 +113,7 @@ class BeltTable extends StatelessWidget {
 
                 // イベント定義
                 onRowTitlePressed: (rowIndex) =>
-                    _onRowTitlePressed(context, rowIndex, rowModels),
+                    _onRowTitlePressed(context, rowIndex, rowModels!),
                 onColumnTitlePressed: (columnIndex) =>
                     _onColumnTitlePressed(context, columnIndex),
               ),
@@ -119,7 +134,9 @@ class BeltTable extends StatelessWidget {
     BeltModel beltModel = rows[rowIndex].beltModel;
 
     // 呼び出し元の処理を実行する
-    onSelectRow(beltModel);
+    if (onSelectRow != null) {
+      onSelectRow!(beltModel);
+    }
   }
 
   _onColumnTitlePressed(BuildContext context, int columnIndex) {
@@ -139,10 +156,10 @@ class BeltTable extends StatelessWidget {
   }
 
   Widget generetedColumnsTitle(
-      int columnIndex, int sortColumnIndex, bool isReverse) {
+      int columnIndex, int? sortColumnIndex, bool? isReverse) {
     Widget sortIcon = columnIndex == sortColumnIndex
         ? Icon(
-            isReverse ? Icons.arrow_drop_down : Icons.arrow_drop_up,
+            (isReverse ?? false) ? Icons.arrow_drop_down : Icons.arrow_drop_up,
           )
         : Container();
 
@@ -161,7 +178,7 @@ class BeltTable extends StatelessWidget {
   Widget generatedRowsTitle(int rowIndex) {
     return MyTableLegendCell(
       child: Text(
-        "${rowModels[rowIndex].legendCellValue}",
+        "${rowModels![rowIndex].legendCellValue}",
         style: TextStyle(decoration: TextDecoration.underline),
         softWrap: true,
         overflow: TextOverflow.clip,
@@ -171,7 +188,7 @@ class BeltTable extends StatelessWidget {
   }
 
   Widget generateContentsCell(int columnIndex, int rowIndex) {
-    BeltCellModel cellModel = rowModels[rowIndex]?.cells[columnIndex];
+    BeltCellModel? cellModel = rowModels![rowIndex].cells[columnIndex];
 
     return MyTableContentsCell(
       child:

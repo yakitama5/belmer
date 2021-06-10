@@ -5,8 +5,8 @@ import 'package:belmer/app/utils/importer.dart';
 
 class SearchFormBloc extends FormBloc<String, String> {
   // final Property
-  final String userId;
-  final List<BeltM> _beltsM;
+  final String? userId;
+  final List<BeltM>? _beltsM;
   final BeltSearchBloc searchBloc;
 
   // Property
@@ -17,9 +17,9 @@ class SearchFormBloc extends FormBloc<String, String> {
   final TextFieldBloc<String> locationField = TextFieldBloc();
 
   SearchFormBloc({
-    @required this.userId,
-    @required List<BeltM> beltsM,
-    @required this.searchBloc,
+    required this.userId,
+    required List<BeltM>? beltsM,
+    required this.searchBloc,
   }) : _beltsM = beltsM {
     // 項目定義
     addFieldBlocs(fieldBlocs: [
@@ -43,11 +43,11 @@ class SearchFormBloc extends FormBloc<String, String> {
     try {
       searchBloc.add(BeltSearchEventSearch(
         userId: userId,
-        beltType: beltType?.value?.id,
-        effectGroupName: effectType?.value?.groupName,
-        effectId: effectValue?.value?.id,
-        memo: memoField?.value,
-        warehouse: locationField?.value,
+        beltType: beltType.value?.id,
+        effectGroupName: effectType.value?.groupName,
+        effectId: effectValue.value?.id,
+        memo: memoField.value,
+        warehouse: locationField.value,
       ));
       emitSuccess(
         successResponse: "成功しました",
@@ -79,21 +79,21 @@ class SearchFormBloc extends FormBloc<String, String> {
 
   List<EffectModel> _getSelectableEffectTypes() {
     // 装備が未選択の場合はスルー
-    BeltM selectBelt = beltType.value;
+    BeltM? selectBelt = beltType.value;
     if (selectBelt == null) {
       return [];
     }
 
-    return _beltsM
-        .where((b) => selectBelt == null || b.id == selectBelt.id)
+    return _beltsM!
+        .where((b) => b.id == selectBelt.id)
         .expand((b) => b.effects)
         .where((e) => e.maxFlag)
         .toList();
   }
 
-  List<EffectModel> _getSelectableEffectValues(EffectModel selectValue) {
+  List<EffectModel> _getSelectableEffectValues(EffectModel? selectValue) {
     // 装備が未選択の場合はスルー
-    BeltM selectBelt = beltType.value;
+    BeltM? selectBelt = beltType.value;
     if (selectBelt == null || selectValue == null) {
       return [];
     }

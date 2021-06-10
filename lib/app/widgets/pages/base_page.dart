@@ -16,8 +16,8 @@ class BasePage extends StatelessWidget {
   final Widget child;
 
   const BasePage({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -41,7 +41,7 @@ class BasePage extends StatelessWidget {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({Key key}) : super(key: key);
+  const _Header({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +149,7 @@ class _Header extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key key, @required this.child}) : super(key: key);
+  const _Body({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
@@ -168,7 +168,7 @@ class _Body extends StatelessWidget {
 
 class _GithubIconButton extends StatelessWidget {
   const _GithubIconButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   static const String GITHUB_PAGE_URL =
@@ -193,7 +193,7 @@ class _GithubIconButton extends StatelessWidget {
 
 class _TwitterIconButton extends StatelessWidget {
   const _TwitterIconButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   static const String TWITTER_PAGE_URL = "https://twitter.com/dq10_yakitamago";

@@ -4,7 +4,7 @@ import 'package:belmer/app/widgets/components/itemized_text.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 
 class InfoDialog extends StatelessWidget {
-  const InfoDialog({Key key}) : super(key: key);
+  const InfoDialog({Key? key}) : super(key: key);
 
   static void show(BuildContext context) {
     AwesomeDialog(
@@ -33,7 +33,7 @@ class InfoDialog extends StatelessWidget {
     return DefaultTextStyle(
         style: Theme.of(context)
             .textTheme
-            .bodyText1
+            .bodyText1!
             .merge(TextStyle(fontFamily: "Meiryo")),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +70,7 @@ class InfoDialog extends StatelessWidget {
 }
 
 class _H1Text extends StatelessWidget {
-  const _H1Text(this.text, {Key key}) : super(key: key);
+  const _H1Text(this.text, {Key? key}) : super(key: key);
 
   final String text;
 
@@ -88,7 +88,7 @@ class _H1Text extends StatelessWidget {
 }
 
 class _H2Text extends StatelessWidget {
-  const _H2Text(this.text, {Key key}) : super(key: key);
+  const _H2Text(this.text, {Key? key}) : super(key: key);
 
   final String text;
 

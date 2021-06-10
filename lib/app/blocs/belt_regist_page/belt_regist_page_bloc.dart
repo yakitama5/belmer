@@ -11,9 +11,8 @@ class BeltRegistPageBloc
     extends Bloc<BeltRegistPageEvent, BeltRegistPageState> {
   final BeltsRepository _repository;
 
-  BeltRegistPageBloc({BeltsRepository repository})
-      : assert(repository != null),
-        _repository = repository,
+  BeltRegistPageBloc({required BeltsRepository repository})
+      : _repository = repository,
         super(BeltRegistPageStatePure());
 
   @override
@@ -31,7 +30,7 @@ class BeltRegistPageBloc
       List<BeltM> beltM = await JsonUtils.loadAccessoryBeltJson();
 
       // ベルトの取得
-      BeltModel beltModel;
+      BeltModel? beltModel;
       if (event.beltId != null) {
         beltModel = await _repository.selectById(event.userId, event.beltId);
       }

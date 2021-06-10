@@ -4,12 +4,12 @@ import 'package:flutter/rendering.dart';
 
 class MyTableHeaderCell extends StatelessWidget {
   const MyTableHeaderCell({
-    Key key,
+    Key? key,
     this.child,
     this.showCellBorder = false,
   }) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
   final bool showCellBorder;
 
   @override
@@ -27,12 +27,12 @@ class MyTableHeaderCell extends StatelessWidget {
 
 class MyTableLegendCell extends StatelessWidget {
   const MyTableLegendCell({
-    Key key,
+    Key? key,
     this.child,
     this.showCellBorder = false,
   }) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
   final bool showCellBorder;
 
   @override
@@ -49,12 +49,12 @@ class MyTableLegendCell extends StatelessWidget {
 
 class MyTableContentsCell extends StatelessWidget {
   const MyTableContentsCell({
-    Key key,
+    Key? key,
     this.child,
     this.showCellBorder = false,
   }) : super(key: key);
 
-  final Widget child;
+  final Widget? child;
   final bool showCellBorder;
 
   @override
@@ -69,14 +69,14 @@ class MyTableContentsCell extends StatelessWidget {
 
 class MyTableCell extends StatelessWidget {
   const MyTableCell({
-    Key key,
+    Key? key,
     this.child,
     this.showCellBorder = false,
-    @required this.color,
+    required this.color,
   }) : super(key: key);
 
   final bool showCellBorder;
-  final Widget child;
+  final Widget? child;
   final Color color;
 
   @override

@@ -16,7 +16,7 @@ class AuthProgress extends AuthState {}
 class AuthSuccess extends AuthState {
   final LoginModel loginModel;
 
-  AuthSuccess({this.loginModel});
+  AuthSuccess({required this.loginModel});
 }
 
 class AuthFialure extends AuthState {}

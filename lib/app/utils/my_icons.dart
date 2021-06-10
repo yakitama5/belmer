@@ -4,7 +4,7 @@ class MyIcons {
   MyIcons._();
 
   static const _kFontFam = 'MyIcon';
-  static const String _kFontPkg = null;
+  static const String? _kFontPkg = null;
 
   static const IconData face_kanasii =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);

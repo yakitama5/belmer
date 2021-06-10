@@ -1,9 +1,9 @@
 import 'package:belmer/app/utils/importer.dart';
 
 class SlimeIndicator extends StatefulWidget {
-  final Color color;
+  final Color? color;
   const SlimeIndicator({
-    Key key,
+    Key? key,
     this.color,
   }) : super(
           key: key,

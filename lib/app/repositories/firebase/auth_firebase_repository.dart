@@ -8,7 +8,7 @@ class AuthFirestoreRepository implements AuthRepository {
   final GoogleSignIn _googleSignIn;
 
   AuthFirestoreRepository(
-      {FirebaseAuth firebaseAuth, GoogleSignIn googleSignIn})
+      {FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn();
 
@@ -53,13 +53,13 @@ class AuthFirestoreRepository implements AuthRepository {
   ///
   @override
   Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
-    final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
     final AuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
     );
 
     return _firebaseAuth.signInWithCredential(credential);
@@ -77,7 +77,7 @@ class AuthFirestoreRepository implements AuthRepository {
   }
 
   @override
-  Future<User> getCurrentUser() async {
+  Future<User?> getCurrentUser() async {
     return _firebaseAuth.currentUser;
   }
 }

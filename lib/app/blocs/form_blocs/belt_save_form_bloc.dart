@@ -2,11 +2,12 @@ import 'package:belmer/app/models/belts.dart';
 import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/repositories/belts_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
+import 'package:collection/collection.dart' show IterableExtension;
 
 class BeltSaveFormBloc extends FormBloc<String, String> {
   // final Property
   final String _uid;
-  final String _beltId;
+  final String? _beltId;
   final BeltsRepository _repository;
 
   // Property
@@ -30,11 +31,11 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
   // Validator
   Validator<EffectModel> _duplicateEffectType(
       List<SelectFieldBloc> effectList) {
-    return (EffectModel effectModel) {
+    return (EffectModel? effectModel) {
       // 全ての効果一覧の中でから自身の効果種類の件数を取得
       final count = effectList
           .where((e) =>
-              e.value != null && effectModel?.groupName == e?.value?.groupName)
+              e.value != null && effectModel?.groupName == e.value.groupName)
           .length;
 
       if (count >= 1) {
@@ -47,14 +48,12 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
 
   // Constructor
   BeltSaveFormBloc(
-      {String uid,
-      String beltId,
-      BeltsRepository repository,
-      List<BeltM> beltsM,
-      BeltModel beltModel})
-      : assert(repository != null),
-        assert(beltsM != null),
-        _uid = uid,
+      {required String uid,
+      String? beltId,
+      required BeltsRepository repository,
+      required List<BeltM> beltsM,
+      BeltModel? beltModel})
+      : _uid = uid,
         _beltId = beltId,
         _repository = repository {
     // 項目定義
@@ -88,14 +87,14 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
     _setCustomValidator();
   }
 
-  void _setInitialValue(BeltModel beltModel, List<BeltM> beltsM) {
+  void _setInitialValue(BeltModel? beltModel, List<BeltM> beltsM) {
     if (beltModel == null) {
       return;
     }
 
     // 装備種類
-    final BeltM initBeltType =
-        beltsM.firstWhere((e) => e.id == beltModel?.type, orElse: () => null);
+    final BeltM? initBeltType =
+        beltsM.firstWhereOrNull((e) => e.id == beltModel.type);
     if (initBeltType != null) {
       beltType.updateInitialValue(initBeltType);
     }
@@ -108,51 +107,48 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
 
     // 装備効果
     // TODO: 後から成形(Reflection?)
-    EffectModel initEffectModel = initBeltType.effects
-        .firstWhere((e) => e.id == beltModel.effect1, orElse: () => null);
-    EffectModel typeEffectModel;
-    if (initEffectModel != null) {
-      typeEffectModel = initBeltType.effects.firstWhere(
-          (e) => e.groupName == initEffectModel.groupName && e.maxFlag,
-          orElse: () => null);
-      effectType1.updateInitialValue(typeEffectModel);
-      effectValue1.updateInitialValue(initEffectModel);
-    }
-    initEffectModel = initBeltType.effects
-        .firstWhere((e) => e.id == beltModel.effect2, orElse: () => null);
-    if (initEffectModel != null) {
-      typeEffectModel = initBeltType.effects.firstWhere(
-          (e) => e.groupName == initEffectModel.groupName && e.maxFlag,
-          orElse: () => null);
-      effectType2.updateInitialValue(typeEffectModel);
-      effectValue2.updateInitialValue(initEffectModel);
-    }
-    initEffectModel = initBeltType.effects
-        .firstWhere((e) => e.id == beltModel.effect3, orElse: () => null);
-    if (initEffectModel != null) {
-      typeEffectModel = initBeltType.effects.firstWhere(
-          (e) => e.groupName == initEffectModel.groupName && e.maxFlag,
-          orElse: () => null);
-      effectType3.updateInitialValue(typeEffectModel);
-      effectValue3.updateInitialValue(initEffectModel);
-    }
-    initEffectModel = initBeltType.effects
-        .firstWhere((e) => e.id == beltModel.effect4, orElse: () => null);
-    if (initEffectModel != null) {
-      typeEffectModel = initBeltType.effects.firstWhere(
-          (e) => e.groupName == initEffectModel.groupName && e.maxFlag,
-          orElse: () => null);
-      effectType4.updateInitialValue(typeEffectModel);
-      effectValue4.updateInitialValue(initEffectModel);
-    }
-    initEffectModel = initBeltType.effects
-        .firstWhere((e) => e.id == beltModel.effect5, orElse: () => null);
-    if (initEffectModel != null) {
-      typeEffectModel = initBeltType.effects.firstWhere(
-          (e) => e.groupName == initEffectModel.groupName && e.maxFlag,
-          orElse: () => null);
-      effectType5.updateInitialValue(typeEffectModel);
-      effectValue5.updateInitialValue(initEffectModel);
+    if (initBeltType != null) {
+      EffectModel? initEffectModel = initBeltType.effects
+          .firstWhereOrNull((e) => e.id == beltModel.effect1);
+      EffectModel? typeEffectModel;
+      if (initEffectModel != null) {
+        typeEffectModel = initBeltType.effects.firstWhereOrNull(
+            (e) => e.groupName == initEffectModel!.groupName && e.maxFlag);
+        effectType1.updateInitialValue(typeEffectModel);
+        effectValue1.updateInitialValue(initEffectModel);
+      }
+      initEffectModel = initBeltType.effects
+          .firstWhereOrNull((e) => e.id == beltModel.effect2);
+      if (initEffectModel != null) {
+        typeEffectModel = initBeltType.effects.firstWhereOrNull(
+            (e) => e.groupName == initEffectModel!.groupName && e.maxFlag);
+        effectType2.updateInitialValue(typeEffectModel);
+        effectValue2.updateInitialValue(initEffectModel);
+      }
+      initEffectModel = initBeltType.effects
+          .firstWhereOrNull((e) => e.id == beltModel.effect3);
+      if (initEffectModel != null) {
+        typeEffectModel = initBeltType.effects.firstWhereOrNull(
+            (e) => e.groupName == initEffectModel!.groupName && e.maxFlag);
+        effectType3.updateInitialValue(typeEffectModel);
+        effectValue3.updateInitialValue(initEffectModel);
+      }
+      initEffectModel = initBeltType.effects
+          .firstWhereOrNull((e) => e.id == beltModel.effect4);
+      if (initEffectModel != null) {
+        typeEffectModel = initBeltType.effects.firstWhereOrNull(
+            (e) => e.groupName == initEffectModel!.groupName && e.maxFlag);
+        effectType4.updateInitialValue(typeEffectModel);
+        effectValue4.updateInitialValue(initEffectModel);
+      }
+      initEffectModel = initBeltType.effects
+          .firstWhereOrNull((e) => e.id == beltModel.effect5);
+      if (initEffectModel != null) {
+        typeEffectModel = initBeltType.effects.firstWhereOrNull(
+            (e) => e.groupName == initEffectModel!.groupName && e.maxFlag);
+        effectType5.updateInitialValue(typeEffectModel);
+        effectValue5.updateInitialValue(initEffectModel);
+      }
     }
   }
 
@@ -252,14 +248,14 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
       // パラメタ設定
       BeltModel belt = BeltModel(
         id: _beltId,
-        memo: memoField?.value,
-        location: locationField?.value,
-        type: beltType?.value?.id,
-        effect1: effectValue1?.value?.id,
-        effect2: effectValue2?.value?.id,
-        effect3: effectValue3?.value?.id,
-        effect4: effectValue4?.value?.id,
-        effect5: effectValue5?.value?.id,
+        memo: memoField.value,
+        location: locationField.value,
+        type: beltType.value?.id,
+        effect1: effectValue1.value?.id,
+        effect2: effectValue2.value?.id,
+        effect3: effectValue3.value?.id,
+        effect4: effectValue4.value?.id,
+        effect5: effectValue5.value?.id,
       );
 
       // 保存
@@ -286,7 +282,7 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
 
   List<EffectModel> _getSelectableEffectTypes() {
     // 装備が未選択の場合はスルー
-    BeltM selectBelt = beltType.value;
+    BeltM? selectBelt = beltType.value;
     if (selectBelt == null) {
       return [];
     }
@@ -295,9 +291,9 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
     return selectBelt.effects.where((effect) => effect.maxFlag).toList();
   }
 
-  List<EffectModel> _getSelectableEffectValues(EffectModel selectValue) {
+  List<EffectModel> _getSelectableEffectValues(EffectModel? selectValue) {
     // 装備が未選択の場合はスルー
-    BeltM selectBelt = beltType.value;
+    BeltM? selectBelt = beltType.value;
     if (selectBelt == null || selectValue == null) {
       return [];
     }

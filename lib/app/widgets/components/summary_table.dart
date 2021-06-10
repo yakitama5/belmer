@@ -10,18 +10,24 @@ import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SummaryTable extends StatelessWidget {
   final List<EffectModel> _columnTitleModels;
-  final List<BeltRowModel> _rowModels;
-  final void Function(BeltModel beltModel) onSelectRow;
-  final ScrollControllers scrollControllers;
-  final double initialScrollOffsetX;
-  final double initialScrollOffsetY;
+  final List<BeltRowModel>? _rowModels;
+  final void Function(BeltModel beltModel)? onSelectRow;
+  final ScrollController horizontalBodyController;
+  final ScrollController horizontalTitleController;
+  final ScrollController verticalBodyController;
+  final ScrollController verticalTitleController;
+  final double? initialScrollOffsetX;
+  final double? initialScrollOffsetY;
   final bool showScrollableHint;
 
   SummaryTable({
-    Key key,
-    @required List<EffectModel> columnTitleModels,
-    @required List<BeltRowModel> rowModels,
-    this.scrollControllers,
+    Key? key,
+    required List<EffectModel> columnTitleModels,
+    List<BeltRowModel>? rowModels,
+    required this.horizontalBodyController,
+    required this.horizontalTitleController,
+    required this.verticalBodyController,
+    required this.verticalTitleController,
     this.onSelectRow,
     this.initialScrollOffsetX = 0.0,
     this.initialScrollOffsetY = 0.0,
@@ -44,7 +50,10 @@ class SummaryTable extends StatelessWidget {
           contentCellHeight: 60,
           stickyLegendWidth: 180,
           stickyLegendHeight: 60),
-      scrollControllers: scrollControllers,
+      horizontalBodyController: horizontalBodyController,
+      horizontalTitleController: horizontalTitleController,
+      verticalBodyController: verticalBodyController,
+      verticalTitleController: verticalTitleController,
       key: key,
       onSelectRow: onSelectRow,
       initialScrollOffsetX: initialScrollOffsetX,
@@ -58,16 +67,19 @@ class _SummaryBeltTable extends BeltTable {
   static const String LEGEND_CELL_TITLE = "メモ";
 
   const _SummaryBeltTable({
-    Key key,
-    @required List<String> columnTitles,
-    @required List<BeltRowModel> rowModels,
-    @required CellDimensions cellDimensions,
-    @required double height,
-    void Function(BeltModel beltModel) onSelectRow,
-    ScrollControllers scrollControllers,
-    double initialScrollOffsetX,
-    double initialScrollOffsetY,
-    bool showScrollableHint,
+    Key? key,
+    required List<String> columnTitles,
+    required List<BeltRowModel>? rowModels,
+    required CellDimensions cellDimensions,
+    required double height,
+    void Function(BeltModel beltModel)? onSelectRow,
+    required ScrollController horizontalBodyController,
+    required ScrollController horizontalTitleController,
+    required ScrollController verticalBodyController,
+    required ScrollController verticalTitleController,
+    double? initialScrollOffsetX,
+    double? initialScrollOffsetY,
+    bool showScrollableHint = false,
   }) : super(
           key: key,
           legendCellTitle: LEGEND_CELL_TITLE,
@@ -76,16 +88,17 @@ class _SummaryBeltTable extends BeltTable {
           cellDimensions: cellDimensions,
           height: height,
           onSelectRow: onSelectRow,
-          scrollControllers: scrollControllers,
-          initialScrollOffsetX: initialScrollOffsetX,
-          initialScrollOffsetY: initialScrollOffsetY,
+          horizontalBodyController: horizontalBodyController,
+          horizontalTitleController: horizontalTitleController,
+          verticalBodyController: verticalBodyController,
+          verticalTitleController: verticalTitleController,
           showScrollableHint: showScrollableHint,
         );
 
   @override
   Widget generateContentsCell(int columnIndex, int rowIndex) {
-    BeltCellModel cellModel = rowModels[rowIndex]?.cells[columnIndex];
-    SummaryBeltCellModel summaryCellModel = cellModel as SummaryBeltCellModel;
+    BeltCellModel? cellModel = rowModels![rowIndex].cells[columnIndex];
+    SummaryBeltCellModel? summaryCellModel = cellModel as SummaryBeltCellModel?;
 
     return MyTableContentsCell(
         child: summaryCellModel != null

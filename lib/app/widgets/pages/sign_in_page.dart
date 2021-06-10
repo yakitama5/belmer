@@ -6,7 +6,7 @@ import 'package:belmer/app/widgets/components/space_box.dart';
 import 'package:belmer/app/widgets/pages/base_page.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key key}) : super(key: key);
+  const SignInPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class SignInPage extends StatelessWidget {
 }
 
 class _Body extends StatelessWidget {
-  const _Body({Key key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +63,7 @@ class _Body extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: DefaultTextStyle(
-            style: Theme.of(context).textTheme.bodyText1,
+            style: Theme.of(context).textTheme.bodyText1!,
             child: Column(
               children: [
                 Text(
@@ -84,20 +84,20 @@ class _Body extends StatelessWidget {
 }
 
 class _LoginButton extends StatelessWidget {
-  final String _text;
-  final IconData _icon;
-  final VoidCallback _onPressed;
+  final String? _text;
+  final IconData? _icon;
+  final VoidCallback? _onPressed;
 
   ///
   /// Event: ボタン押下
   ///
   void _handlePush() {
     if (_onPressed != null) {
-      _onPressed();
+      _onPressed!();
     }
   }
 
-  const _LoginButton({Key key, text, icon, onPressed})
+  const _LoginButton({Key? key, text, icon, onPressed})
       : _text = text,
         _icon = icon,
         _onPressed = onPressed,
@@ -120,7 +120,7 @@ class _LoginButton extends StatelessWidget {
                 ),
               ),
               Text(
-                _text,
+                _text!,
                 style: TextStyle(fontSize: 20),
               ),
             ],
@@ -133,7 +133,7 @@ class _LoginButton extends StatelessWidget {
 }
 
 class _Logo extends StatelessWidget {
-  const _Logo({Key key}) : super(key: key);
+  const _Logo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

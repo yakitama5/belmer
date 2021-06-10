@@ -4,7 +4,7 @@ import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/pages/main_page.dart';
 
 class MenuRouter extends StatelessWidget {
-  const MenuRouter({Key key}) : super(key: key);
+  const MenuRouter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class _Router {
         ),
   };
 
-  Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final pageBuilder = _routes[settings.name];
+  Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    final pageBuilder = _routes[settings.name!];
     if (pageBuilder != null) {
       return MaterialPageRoute<void>(
         builder: (context) => pageBuilder(context, settings),

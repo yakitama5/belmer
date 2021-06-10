@@ -4,10 +4,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class ScrollableHintContainer extends StatelessWidget {
   final Widget child;
-  final bool showScrollableHint;
+  final bool? showScrollableHint;
 
   ScrollableHintContainer({
-    @required this.child,
+    required this.child,
     this.showScrollableHint = false,
   });
 
@@ -15,7 +15,7 @@ class ScrollableHintContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: 全体的に汚い作りになっているのでリファクタリングを行う
 
-    if (!showScrollableHint) {
+    if (!showScrollableHint!) {
       return this.child;
     }
 
@@ -121,11 +121,10 @@ class _ScrollableHintWidget extends HookWidget {
 }
 
 class _MarkPainter extends CustomPainter {
-  final Color _color;
+  final Color? _color;
 
-  _MarkPainter({@required Color color})
-      : assert(color != null),
-        _color = color,
+  _MarkPainter({required Color? color})
+      : _color = color,
         super();
 
   @override
@@ -145,7 +144,7 @@ class _MarkPainter extends CustomPainter {
     final Offset lineFrom = Offset(widthCenter - 35, heightCenter);
     final Offset lineTo = Offset(widthCenter + 35, heightCenter);
     final linePaint = Paint()
-      ..color = _color
+      ..color = _color!
       ..strokeCap = StrokeCap.square
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8;
@@ -157,7 +156,7 @@ class _MarkPainter extends CustomPainter {
     final double heightCenter = size.height / 2;
 
     final paint = Paint()
-      ..color = _color
+      ..color = _color!
       ..strokeCap = StrokeCap.square;
 
     // 横線

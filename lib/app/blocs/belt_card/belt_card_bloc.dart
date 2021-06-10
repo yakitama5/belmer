@@ -12,9 +12,8 @@ import 'package:belmer/app/utils/json_utils.dart';
 class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
   final BeltsRepository _repository;
 
-  BeltCardBloc({BeltsRepository repository})
-      : assert(repository != null),
-        _repository = repository,
+  BeltCardBloc({required BeltsRepository repository})
+      : _repository = repository,
         super(BeltCardStatePure());
 
   @override
@@ -30,9 +29,8 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
     try {
       // ベルトのマスタを取得
       final List<BeltM> beltsM = await JsonUtils.loadAccessoryBeltJson();
-      final List<EffectModel> allEffects = beltsM
-          .firstWhere((e) => e.id == event.beltType, orElse: () => null)
-          ?.effects;
+      final List<EffectModel> allEffects =
+          beltsM.firstWhereOrNull((e) => e.id == event.beltType)?.effects ?? [];
 
       // ベルト一覧の取得
       final Stream<List<BeltModel>> beltModelsStream = _repository
@@ -51,6 +49,8 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
         rowModelsStream: rowModelsStream,
       );
     } catch (e, stacktrace) {
+      print(e);
+      print(stacktrace);
       yield BeltCardStateFailure();
     }
   }
@@ -60,14 +60,14 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
       List<EffectModel> columnTitleEffects,
       Stream<List<BeltModel>> beltModelsStream) {
     // 列毎の効果一覧をMap形式で取得
-    final Map<String, List<EffectModel>> columnTitleMap =
+    final Map<String?, List<EffectModel>> columnTitleMap =
         groupBy(allEffects, (item) => item.groupName);
 
     // 取得したベルト一覧をテーブル行一覧に変換する
     return beltModelsStream.map((List<BeltModel> belts) {
       return belts.map((belt) {
         // ベルトの効果一覧を設定
-        List<String> beltEffectModels = [
+        List<String?> beltEffectModels = [
           belt.effect1,
           belt.effect2,
           belt.effect3,
@@ -75,14 +75,13 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
           belt.effect5,
         ];
 
-        List<SummaryBeltCellModel> cells = columnTitleEffects.map((effect) {
+        List<SummaryBeltCellModel?> cells = columnTitleEffects.map((effect) {
           // カラム内の効果一覧を取得
-          List<EffectModel> columnEffectModels =
+          List<EffectModel>? columnEffectModels =
               columnTitleMap[effect.groupName];
 
-          EffectModel effectModel = columnEffectModels?.firstWhere(
-              (e) => beltEffectModels.contains(e.id),
-              orElse: () => null);
+          EffectModel? effectModel = columnEffectModels
+              ?.firstWhereOrNull((e) => beltEffectModels.contains(e.id));
 
           return effectModel != null
               ? SummaryBeltCellModel(
@@ -95,7 +94,7 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
 
         return BeltRowModel(
           beltModel: belt,
-          legendCellValue: belt.memo,
+          legendCellValue: belt.memo ?? "",
           cells: cells,
         );
       }).toList();

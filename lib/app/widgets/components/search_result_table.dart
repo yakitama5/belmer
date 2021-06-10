@@ -6,20 +6,22 @@ import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SearchResultTable extends StatelessWidget {
   final List<String> columnTitles;
-  final List<BeltRowModel> beltRowModels;
-  final ScrollControllers scrollControllers;
-  final void Function(BeltModel beltModel) onSelectRow;
-  final double initialScrollOffsetX;
-  final double initialScrollOffsetY;
+  final List<BeltRowModel>? beltRowModels;
+  final ScrollController horizontalBodyController;
+  final ScrollController horizontalTitleController;
+  final ScrollController verticalBodyController;
+  final ScrollController verticalTitleController;
+  final void Function(BeltModel beltModel)? onSelectRow;
 
   const SearchResultTable({
-    Key key,
-    this.columnTitles,
+    Key? key,
+    required this.columnTitles,
     this.beltRowModels,
-    this.scrollControllers,
+    required this.horizontalBodyController,
+    required this.horizontalTitleController,
+    required this.verticalBodyController,
+    required this.verticalTitleController,
     this.onSelectRow,
-    this.initialScrollOffsetX,
-    this.initialScrollOffsetY,
   }) : super(key: key);
 
   @override
@@ -34,11 +36,12 @@ class SearchResultTable extends StatelessWidget {
           stickyLegendWidth: 180,
           stickyLegendHeight: 60),
       height: 600,
-      scrollControllers: scrollControllers,
+      horizontalBodyController: horizontalBodyController,
+      horizontalTitleController: horizontalTitleController,
+      verticalBodyController: verticalBodyController,
+      verticalTitleController: verticalTitleController,
       key: key,
       onSelectRow: onSelectRow,
-      initialScrollOffsetX: initialScrollOffsetX,
-      initialScrollOffsetY: initialScrollOffsetY,
       showCellBorder: true,
     );
   }

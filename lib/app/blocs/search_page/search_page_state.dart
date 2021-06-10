@@ -13,7 +13,7 @@ class SearchPageStateProgress extends SearchPageState {}
 class SearchPageStateSuccess extends SearchPageState {
   final List<BeltM> beltM;
 
-  SearchPageStateSuccess({this.beltM});
+  SearchPageStateSuccess({required this.beltM});
 }
 
 class SearchPageStateFailure extends SearchPageState {}

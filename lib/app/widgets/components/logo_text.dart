@@ -3,11 +3,11 @@ import 'package:belmer/app/utils/importer.dart';
 
 class LogoText extends StatelessWidget {
   const LogoText({
-    Key key,
+    Key? key,
     this.textStyle,
   }) : super(key: key);
 
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {

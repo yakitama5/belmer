@@ -5,15 +5,15 @@ class AccordionIconButton extends StatefulWidget {
   final double _iconSize;
   final String _label;
   final double _maxWidth;
-  final void Function() _onTap;
+  final void Function()? _onTap;
 
   const AccordionIconButton(
-      {Key key,
-      @required IconData iconData,
-      @required double iconSize,
-      @required String label,
-      @required double maxWidth,
-      void Function() onTap})
+      {Key? key,
+      required IconData iconData,
+      required double iconSize,
+      required String label,
+      required double maxWidth,
+      void Function()? onTap})
       : _iconData = iconData,
         _iconSize = iconSize,
         _label = label,
@@ -32,7 +32,7 @@ class _State extends State<AccordionIconButton> {
   double width;
 
   _State({
-    @required this.width,
+    required this.width,
   })  : opacity = INITIAL_OPACITY,
         super();
 

@@ -1,4 +1,5 @@
 import 'package:belmer/app/blocs/belt_card/belt_card_importer.dart';
+import 'package:belmer/app/models/belt_table_model.dart';
 import 'package:belmer/app/models/login_model.dart';
 import 'package:belmer/app/repositories/firebase/belts_firebase_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
@@ -11,8 +12,8 @@ import 'package:belmer/app/widgets/pages/dialog/belt_regist_dialog.dart';
 import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class BeltsCard extends StatelessWidget {
-  final String beltType;
-  final String headerName;
+  final String? beltType;
+  final String? headerName;
   final ScrollController _horizontalBodyController = ScrollController();
   final ScrollController _horizontalTitleController = ScrollController();
   final ScrollController _verticalBodyController = ScrollController();
@@ -20,7 +21,7 @@ class BeltsCard extends StatelessWidget {
   final bool showScrollableHint;
 
   BeltsCard({
-    Key key,
+    Key? key,
     this.beltType,
     this.headerName,
     this.showScrollableHint = false,
@@ -77,7 +78,7 @@ class BeltsCard extends StatelessWidget {
                 bottomRight: Radius.circular(20),
               )),
           child: Text(
-            headerName,
+            headerName!,
             style: Theme.of(context).textTheme.caption,
           ),
         ),
@@ -117,28 +118,21 @@ class BeltsCard extends StatelessWidget {
       BuildContext context, BeltCardStateSuccess state) {
     return StreamBuilder(
       stream: state.rowModelsStream,
-      builder: (_, snapshot) {
-        if (!snapshot.hasData) {
+      builder: (_, AsyncSnapshot<List<BeltRowModel>> snapshot) {
+        if (snapshot.hasError) {
+          print(snapshot.error);
+          return FailureWidget();
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return SlimeIndicator(color: Theme.of(context).backgroundColor);
         }
 
-        // スクロール位置を保持する
-        double initialScrollOffsetX = _horizontalBodyController.hasClients
-            ? _horizontalBodyController.offset
-            : null;
-        double initialScrollOffsetY = _verticalBodyController.hasClients
-            ? _verticalBodyController.offset
-            : null;
-
         return SummaryTable(
-          scrollControllers: ScrollControllers(
-            horizontalBodyController: _horizontalBodyController,
-            horizontalTitleController: _horizontalTitleController,
-            verticalBodyController: _verticalBodyController,
-            verticalTitleController: _verticalTitleController,
-          ),
-          initialScrollOffsetX: initialScrollOffsetX,
-          initialScrollOffsetY: initialScrollOffsetY,
+          horizontalBodyController: _horizontalBodyController,
+          horizontalTitleController: _horizontalTitleController,
+          verticalBodyController: _verticalBodyController,
+          verticalTitleController: _verticalTitleController,
           onSelectRow: (beltModel) =>
               BeltRegistDialog.show(context, beltId: beltModel.id),
           columnTitleModels: state.columnTitleModels,
