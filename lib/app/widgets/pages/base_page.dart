@@ -66,9 +66,7 @@ class _Header extends StatelessWidget {
   Widget _buildHeaderLeftItem(BuildContext context) {
     return Row(
       children: [
-        LogoText(
-          textStyle: Theme.of(context).textTheme.headline5,
-        ),
+        LogoText(textStyle: Theme.of(context).textTheme.headline5),
         SpaceBox(width: 10),
         const _GithubIconButton(),
         const _TwitterIconButton(),

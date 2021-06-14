@@ -14,7 +14,6 @@ import 'package:belmer/app/widgets/components/slime_indicator.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 import 'package:belmer/app/widgets/pages/dialog/belt_regist_dialog.dart';
 import 'package:expandable/expandable.dart';
-import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SearchPage extends StatelessWidget {
   final ScrollController _horizontalBodyController = ScrollController();
