@@ -1,7 +1,6 @@
 name: belmer
-description: A new Flutter project.
+description: エンジョイ勢からガチ勢まで。ドラクエ10のおいしい情報をお届けします！(DQXベルト管理用ファンサイト)
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
