@@ -36,7 +36,7 @@ class _Body extends StatelessWidget {
     AuthBloc authBloc = context.read<AuthBloc>();
     return Column(
       children: [
-        SpaceBox(height: 150),
+        SpaceBox(height: 100),
         const _Logo(),
         SpaceBox(height: 20),
         Text(
