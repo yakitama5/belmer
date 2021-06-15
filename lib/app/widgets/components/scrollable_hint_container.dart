@@ -13,8 +13,6 @@ class ScrollableHintContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: 全体的に汚い作りになっているのでリファクタリングを行う
-
     if (!showScrollableHint!) {
       return this.child;
     }
