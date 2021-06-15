@@ -8302,9 +8302,9 @@
                 },
                 {
                     "id": "1260",
-                    "groupName": "ツメ装備時 土攻撃ダメージ",
+                    "groupName": "ムチ装備時 土攻撃ダメージ",
                     "groupShortName": "ムチ土",
-                    "name": "ツメ装備時 土攻撃ダメージ+13%",
+                    "name": "ムチ装備時 土攻撃ダメージ+13%",
                     "value": "13%",
                     "sortKey": 40,
                     "maxFlag": true,
