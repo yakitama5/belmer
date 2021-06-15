@@ -51,7 +51,6 @@ class _Header extends StatelessWidget {
           minHeight: 75,
           maxWidth: PAGE_WIDTH,
         ),
-        // TODO: 左右配置のいい方法あったらそれにする
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

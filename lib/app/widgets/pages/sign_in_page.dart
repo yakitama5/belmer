@@ -52,11 +52,6 @@ class _Body extends StatelessWidget {
               text: "Google",
               onPressed: () => authBloc.add(SignInWithGoogle()),
             ),
-            // _LoginButton(
-            //   icon: Icons.person,
-            //   text: "No Auth",
-            //   onPressed: () => authBloc.add(SignInAnonymously()),
-            // ),
           ],
         ),
         SpaceBox(height: 50),
