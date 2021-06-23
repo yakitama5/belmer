@@ -80,13 +80,13 @@ flutter:
   fonts:
     - family: Yikes
       fonts:
-        - asset: assets/fonts/Yikes_medium.ttf
+        - asset: assets/fonts/Yikes.ttf
     - family: Kiwi Maru
       fonts:
-        - asset: assets/fonts/KiwiMaru-Regular.ttf
+        - asset: assets/fonts/KiwiMaru-subset.ttf
     - family: Meiryo
       fonts:
-        - asset: assets/fonts/MEIRYO.TTC
+        - asset: assets/fonts/メイリオ-subset.ttc
     - family: MyIcon
       fonts:
         - asset: assets/icon/MyFlutterIcon.ttf
