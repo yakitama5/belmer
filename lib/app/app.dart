@@ -5,8 +5,10 @@ import 'package:belmer/app/routes/menu_router.dart';
 import 'package:belmer/app/utils/constants.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/utils/my_colors.dart';
+import 'package:belmer/app/utils/my_fonts.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
-import 'package:belmer/app/widgets/pages/sign_in_page.dart';
+import 'package:belmer/app/widgets/pages/index_page.dart';
+import 'package:belmer/app/widgets/pages/pc/sign_in_page.dart';
 
 class App extends StatelessWidget {
   @override
@@ -70,7 +72,7 @@ class _App extends StatelessWidget {
   /// Build: 未認証時
   ///
   Widget _buildNotAuth(BuildContext context, AuthState state) {
-    return const SignInPage();
+    return const IndexPage();
   }
 
   ///
@@ -88,13 +90,13 @@ class _App extends StatelessWidget {
       _accentColor = MyColors.primaryColor;
       _secondryColor = MyColors.secondryColor;
       _onSecondryColor = MyColors.onSecondryColor;
-      _fontFamily = "Kiwi Maru";
+      _fontFamily = MyFonts.Kiwi;
     } else {
       _primaryColor = MyColors.primaryColor;
       _accentColor = MyColors.whiteColor;
       _secondryColor = MyColors.whiteColor;
       _onSecondryColor = MyColors.primaryColor;
-      _fontFamily = "Meiryo";
+      _fontFamily = MyFonts.Meiryo;
     }
 
     return ThemeData(
@@ -107,6 +109,18 @@ class _App extends StatelessWidget {
       secondaryHeaderColor: _secondryColor,
       dividerColor: _accentColor,
       indicatorColor: _accentColor,
+
+      // AppBar (スマホでのみ使用)
+      appBarTheme: AppBarTheme(
+        backgroundColor: _primaryColor,
+        elevation: 0.0,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontFamily: MyFonts.Yikes,
+          color: _accentColor,
+          fontSize: 30,
+        ),
+      ),
 
       // アイコンテーマ
       iconTheme: IconThemeData(
@@ -127,7 +141,7 @@ class _App extends StatelessWidget {
         ),
       ),
 
-      // 各種テキストテーマ
+      // PC版各種テキストテーマ
       textTheme: TextTheme(
         // 通常テキスト
         bodyText1: TextStyle(color: _accentColor),
@@ -136,7 +150,7 @@ class _App extends StatelessWidget {
         headline1: TextStyle(
           color: _accentColor,
           fontSize: 20,
-          fontFamily: "Segoe UI",
+          fontFamily: MyFonts.Segoe,
         ),
 
         // 入力フォーム内ヘッダー
@@ -153,14 +167,14 @@ class _App extends StatelessWidget {
 
         // Logo SubTitles
         headline5: TextStyle(
-          fontFamily: 'Yikes',
+          fontFamily: MyFonts.Yikes,
           fontSize: 30,
           color: _accentColor,
         ),
 
         // Logo Title
         headline6: TextStyle(
-          fontFamily: 'Yikes',
+          fontFamily: MyFonts.Yikes,
           fontSize: 100,
           color: _primaryColor,
         ),
@@ -173,7 +187,7 @@ class _App extends StatelessWidget {
 
         // Sub Title
         subtitle2: TextStyle(
-          fontFamily: 'Yikes',
+          fontFamily: MyFonts.Yikes,
           fontSize: 20,
           color: _accentColor,
         ),
@@ -184,6 +198,9 @@ class _App extends StatelessWidget {
           fontSize: 20,
         ),
       ),
+
+      // スマホ版テキストテーマ
+
       fontFamily: _fontFamily,
     );
   }

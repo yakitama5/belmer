@@ -1,35 +1,10 @@
 import 'package:belmer/app/blocs/authentication/auth_importer.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/logo_text.dart';
-import 'package:belmer/app/widgets/pages/dialog/dqx_progress_dialog.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
-import 'package:belmer/app/widgets/pages/base_page.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (prev, current) {
-          // プログレス制御
-          if (current is AuthProgress) {
-            DqxProgressDialog.show(context);
-          } else {
-            DqxProgressDialog.hide(context);
-          }
-        },
-        child: BasePage(
-          child: const _Body(),
-        ),
-      ),
-    );
-  }
-}
-
-class _Body extends StatelessWidget {
-  const _Body({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

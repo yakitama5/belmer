@@ -1,7 +1,7 @@
 import 'package:belmer/app/blocs/page_view/page_view_bloc.dart';
 import 'package:belmer/app/blocs/page_view/page_view_event.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/pages/main_page.dart';
+import 'package:belmer/app/widgets/pages/logged_in_router_page.dart';
 
 class MenuRouter extends StatelessWidget {
   const MenuRouter({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _Router {
   final _routes = <String, Widget Function(BuildContext, RouteSettings)>{
     root: (context, settings) => BlocProvider<PageViewBloc>(
           create: (context) => PageViewBloc()..add(PageViewEventHome()),
-          child: MainPage(),
+          child: LogedInRouterPage(),
         ),
   };
 
