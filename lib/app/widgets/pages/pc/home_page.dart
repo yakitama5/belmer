@@ -1,6 +1,6 @@
 import 'package:belmer/app/utils/constants.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/belt_card.dart';
+import 'package:belmer/app/widgets/components/pc/belt_card.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 
 class HomePage extends StatelessWidget {

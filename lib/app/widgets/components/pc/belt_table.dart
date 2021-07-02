@@ -4,8 +4,8 @@ import 'package:belmer/app/blocs/sort/sort_state.dart';
 import 'package:belmer/app/models/belt_table_model.dart';
 import 'package:belmer/app/models/belts.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/my_table_components.dart';
-import 'package:belmer/app/widgets/components/scrollable_hint_container.dart';
+import 'package:belmer/app/widgets/components/pc/my_table_components.dart';
+import 'package:belmer/app/widgets/components/pc/scrollable_hint_container.dart';
 import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class BeltTable extends StatelessWidget {

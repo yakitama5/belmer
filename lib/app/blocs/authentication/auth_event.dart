@@ -16,4 +16,4 @@ class SignInWithGoogle extends AuthEvent {}
 
 class SignInWithTwitter extends AuthEvent {}
 
-class LoggedOut extends AuthEvent {}
+class SignOut extends AuthEvent {}

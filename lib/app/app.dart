@@ -200,6 +200,7 @@ class _App extends StatelessWidget {
       ),
 
       // スマホ版テキストテーマ
+      accentTextTheme: TextTheme(),
 
       fontFamily: _fontFamily,
     );

@@ -4,8 +4,8 @@ import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/models/summary_belt_table_model.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/utils/my_icons.dart';
-import 'package:belmer/app/widgets/components/belt_table.dart';
-import 'package:belmer/app/widgets/components/my_table_components.dart';
+import 'package:belmer/app/widgets/components/pc/belt_table.dart';
+import 'package:belmer/app/widgets/components/pc/my_table_components.dart';
 import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SummaryTable extends StatelessWidget {

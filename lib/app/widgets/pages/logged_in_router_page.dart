@@ -2,6 +2,7 @@ import 'package:belmer/app/blocs/page_view/page_view_importer.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/responsive_widget.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
+import 'package:belmer/app/widgets/pages/mobile/mobile_home_page.dart';
 import 'package:belmer/app/widgets/pages/pc/base_page.dart';
 import 'package:belmer/app/widgets/pages/pc/home_page.dart';
 import 'package:belmer/app/widgets/pages/mobile/mobile_base_page.dart';
@@ -57,7 +58,7 @@ class _MobileScreen extends StatelessWidget {
         Widget child = Container();
         String title = "";
         if (state is PageViewStateHome) {
-          child = Container();
+          child = const MobileHomePage();
           title = "Home";
         } else if (state is PageViewStateSearch) {
           child = Container();

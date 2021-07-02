@@ -3,6 +3,8 @@ import 'package:belmer/app/blocs/authentication/auth_importer.dart';
 import 'package:belmer/app/blocs/page_view/page_view_bloc.dart';
 import 'package:belmer/app/blocs/page_view/page_view_event.dart';
 import 'package:belmer/app/utils/importer.dart';
+import 'package:belmer/app/utils/my_fonts.dart';
+import 'package:belmer/app/widgets/components/space_box.dart';
 
 class MobileBasePage extends StatelessWidget {
   final Widget child;
@@ -74,6 +76,7 @@ class MobileBasePage extends StatelessWidget {
           _HomeMenu(),
           _SearchMenu(),
           _InfoMenu(),
+          _LogoutMenu(),
         ],
       ),
     );
@@ -119,6 +122,19 @@ class _InfoMenu extends StatelessWidget {
   }
 }
 
+class _LogoutMenu extends StatelessWidget {
+  const _LogoutMenu({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return _DrawerItem(
+      title: "Logout",
+      iconData: Icons.logout,
+      onTap: () => context.read<AuthBloc>().add(SignOut()),
+    );
+  }
+}
+
 class _DrawerItem extends StatelessWidget {
   final IconData? iconData;
   final String title;
@@ -149,9 +165,13 @@ class _DrawerItem extends StatelessWidget {
                 this.iconData,
                 size: 25,
               ),
+            SpaceBox(width: 10),
             Text(
               this.title,
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(
+                fontSize: 25,
+                fontFamily: MyFonts.Meiryo,
+              ),
             ),
           ],
         ),

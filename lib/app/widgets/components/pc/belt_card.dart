@@ -3,11 +3,11 @@ import 'package:belmer/app/models/belt_table_model.dart';
 import 'package:belmer/app/models/login_model.dart';
 import 'package:belmer/app/repositories/firebase/belts_firebase_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/failure_widget.dart';
-import 'package:belmer/app/widgets/components/header_icon_button.dart';
+import 'package:belmer/app/widgets/components/pc/failure_widget.dart';
+import 'package:belmer/app/widgets/components/pc/header_icon_button.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
-import 'package:belmer/app/widgets/components/summary_table.dart';
+import 'package:belmer/app/widgets/components/pc/summary_table.dart';
 import 'package:belmer/app/widgets/pages/dialog/belt_regist_dialog.dart';
 
 class BeltsCard extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:belmer/app/blocs/authentication/auth_importer.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/logo_text.dart';
+import 'package:belmer/app/widgets/components/pc/logo_text.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 
 class SignInPage extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:belmer/app/models/login_model.dart';
 import 'package:belmer/app/repositories/firebase/belts_firebase_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/utils/my_colors.dart';
-import 'package:belmer/app/widgets/components/failure_widget.dart';
+import 'package:belmer/app/widgets/components/pc/failure_widget.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
 import 'package:belmer/app/widgets/pages/dialog/dqx_progress_dialog.dart';
 import 'package:flutter/foundation.dart';

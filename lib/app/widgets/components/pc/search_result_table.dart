@@ -1,7 +1,7 @@
 import 'package:belmer/app/models/belt_table_model.dart';
 import 'package:belmer/app/models/belts.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/belt_table.dart';
+import 'package:belmer/app/widgets/components/pc/belt_table.dart';
 import 'package:table_sticky_headers/table_sticky_headers.dart';
 
 class SearchResultTable extends StatelessWidget {

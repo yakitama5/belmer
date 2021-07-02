@@ -4,8 +4,8 @@ import 'package:belmer/app/blocs/page_view/page_view_bloc.dart';
 import 'package:belmer/app/blocs/page_view/page_view_event.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/accordion_icon_button.dart';
-import 'package:belmer/app/widgets/components/header_icon_button.dart';
-import 'package:belmer/app/widgets/components/logo_text.dart';
+import 'package:belmer/app/widgets/components/pc/header_icon_button.dart';
+import 'package:belmer/app/widgets/components/pc/logo_text.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 import 'package:belmer/app/widgets/pages/dialog/info_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -140,7 +140,7 @@ class _Header extends StatelessWidget {
       iconSize: 30,
       maxWidth: 100,
       label: "Logout",
-      onTap: () => context.read<AuthBloc>().add(LoggedOut()),
+      onTap: () => context.read<AuthBloc>().add(SignOut()),
     );
   }
 }
