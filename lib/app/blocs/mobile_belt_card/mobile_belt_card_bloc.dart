@@ -43,7 +43,7 @@ class MobileBeltCardBloc
       final List<EffectModel> columnTitleEffects =
           allEffects.where((e) => e.maxFlag && e.listDispFlag).toList();
 
-      // TODO: すぐ作る
+      // TODO: モバイル用のRow,Columnに変換する
       final Stream<List<MobileBeltCardEffectModel>> rowModelsStream =
           Stream.value(List.empty());
 
