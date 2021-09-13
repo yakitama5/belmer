@@ -4,6 +4,7 @@ import 'package:belmer/app/blocs/page_view/page_view_bloc.dart';
 import 'package:belmer/app/blocs/page_view/page_view_event.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/accordion_icon_button.dart';
+import 'package:belmer/app/widgets/components/pc/header_button.dart';
 import 'package:belmer/app/widgets/components/pc/header_icon_button.dart';
 import 'package:belmer/app/widgets/components/pc/logo_text.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
@@ -104,30 +105,24 @@ class _Header extends StatelessWidget {
   }
 
   Widget _buildHomeButton(BuildContext context) {
-    return AccordionIconButton(
+    return HeaderButton(
       iconData: Icons.home,
-      iconSize: 30,
-      maxWidth: 100,
       label: "Home",
       onTap: () => context.read<PageViewBloc>().add(PageViewEventHome()),
     );
   }
 
   Widget _buildSearchButton(BuildContext context) {
-    return AccordionIconButton(
+    return HeaderButton(
       iconData: Icons.search,
-      iconSize: 30,
-      maxWidth: 100,
       label: "Search",
       onTap: () => context.read<PageViewBloc>().add(PageViewEventSearch()),
     );
   }
 
   Widget _buildInfoButton(BuildContext context) {
-    return AccordionIconButton(
+    return HeaderButton(
       iconData: Icons.info,
-      iconSize: 30,
-      maxWidth: 100,
       label: "Info",
       onTap: () => InfoDialog.show(context),
       // onTap: () => context.read<PageViewBloc>().add(PageViewEventTest()),
@@ -135,10 +130,8 @@ class _Header extends StatelessWidget {
   }
 
   Widget _buildLogoutButton(BuildContext context) {
-    return AccordionIconButton(
+    return HeaderButton(
       iconData: Icons.logout,
-      iconSize: 30,
-      maxWidth: 100,
       label: "Logout",
       onTap: () => context.read<AuthBloc>().add(SignOut()),
     );
