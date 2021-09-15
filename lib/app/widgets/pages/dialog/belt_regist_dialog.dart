@@ -6,6 +6,7 @@ import 'package:belmer/app/models/login_model.dart';
 import 'package:belmer/app/repositories/firebase/belts_firebase_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/utils/my_colors.dart';
+import 'package:belmer/app/widgets/components/form_elevated_button.dart';
 import 'package:belmer/app/widgets/components/pc/failure_widget.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
 import 'package:belmer/app/widgets/pages/dialog/dqx_progress_dialog.dart';
@@ -167,7 +168,7 @@ class BeltRegistDialog extends StatelessWidget {
   Widget _buildFooterItems(BuildContext context) {
     return Container(
       constraints: BoxConstraints(maxHeight: 200),
-      padding: EdgeInsets.only(top: 20),
+      padding: EdgeInsets.only(top: 10, bottom: 10),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(color: Theme.of(context).dividerColor),
@@ -214,38 +215,12 @@ class BeltRegistDialog extends StatelessWidget {
 /// Components in the page
 ///
 
-class _MyElevatedButton extends StatelessWidget {
-  final void Function() onPressed;
-  final Widget child;
-  final ButtonStyle? style;
-
-  const _MyElevatedButton({
-    Key? key,
-    required this.onPressed,
-    required this.child,
-    this.style,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 120,
-      height: 40,
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: child,
-        style: style,
-      ),
-    );
-  }
-}
-
 class _SubmitButton extends StatelessWidget {
   const _SubmitButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return _MyElevatedButton(
+    return FormElevatedButton(
       onPressed: () => context.read<BeltSaveFormBloc>().submit(),
       child: Text("保存"),
     );
@@ -257,7 +232,7 @@ class _DeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _MyElevatedButton(
+    return FormElevatedButton(
       onPressed: () => context.read<BeltSaveFormBloc>().delete(),
       child: Text("削除"),
       style: ElevatedButton.styleFrom(
@@ -273,7 +248,7 @@ class _CancelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _MyElevatedButton(
+    return FormElevatedButton(
       onPressed: () => Navigator.pop(context),
       child: Text("キャンセル"),
       style: ElevatedButton.styleFrom(

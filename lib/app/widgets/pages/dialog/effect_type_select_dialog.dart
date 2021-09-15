@@ -1,17 +1,18 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/utils/importer.dart';
+import 'package:belmer/app/widgets/components/form_elevated_button.dart';
 import 'package:supercharged/supercharged.dart';
 
 class EffectTypeSelectDialog extends StatefulWidget {
   final BeltM? _beltM;
   final EffectModel? _selectedEffect;
-  final void Function(EffectModel effectModel)? _onSelect;
+  final void Function(EffectModel? effectModel)? _onSelect;
 
   static void show(
     BuildContext context, {
     BeltM? beltM,
-    void Function(EffectModel effectModel)? onSelect,
+    void Function(EffectModel? effectModel)? onSelect,
     EffectModel? selectedEffect,
   }) {
     AwesomeDialog(
@@ -20,7 +21,7 @@ class EffectTypeSelectDialog extends StatefulWidget {
         top: 20,
         left: 30,
         right: 30,
-        bottom: 50,
+        bottom: 0,
       ),
       useRootNavigator: true,
       borderSide: BorderSide(color: Theme.of(context).dividerColor, width: 2),
@@ -42,7 +43,7 @@ class EffectTypeSelectDialog extends StatefulWidget {
   const EffectTypeSelectDialog({
     Key? key,
     BeltM? beltM,
-    void Function(EffectModel effectModel)? onSelect,
+    void Function(EffectModel? effectModel)? onSelect,
     EffectModel? selectedEffect,
   })  : _beltM = beltM,
         _onSelect = onSelect,
@@ -69,7 +70,7 @@ class _Widget extends State<EffectTypeSelectDialog> {
     });
   }
 
-  void _handleSelect(BuildContext context, EffectModel effectModel) {
+  void _handleSelect(BuildContext context, EffectModel? effectModel) {
     hide(context);
     if (widget._onSelect != null) {
       widget._onSelect!(effectModel);
@@ -80,6 +81,15 @@ class _Widget extends State<EffectTypeSelectDialog> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: [
+        _buildBody(context),
+        _buildFooter(context),
+      ],
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
     Map<String, Map<String, List<EffectModel>>>? effectsMap = widget
         ._beltM?.effects
         .groupListsBy((element) => element.groupName)
@@ -94,9 +104,8 @@ class _Widget extends State<EffectTypeSelectDialog> {
       return Container();
     }
 
-    // TODO レイアウトを変更する？
     return Container(
-      height: 600,
+      height: 550,
       child: SingleChildScrollView(
         child: Column(
           children: effectsMap.entries
@@ -143,6 +152,31 @@ class _Widget extends State<EffectTypeSelectDialog> {
               )
               .toList(),
         ),
+      ),
+    );
+  }
+
+  Widget _buildFooter(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      // constraints: BoxConstraints(maxHeight: 70),
+      padding: EdgeInsets.only(top: 15, bottom: 15),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(color: Theme.of(context).dividerColor),
+        ),
+      ),
+      alignment: Alignment.center,
+      child: FormElevatedButton(
+        onPressed: () => _handleSelect(context, null),
+        child: Text("選択クリア"),
+        style: ElevatedButton.styleFrom(
+            primary: Theme.of(context).primaryColor,
+            onPrimary: Theme.of(context).accentColor,
+            side: BorderSide(
+              color: Theme.of(context).accentColor,
+              width: 1,
+            )).merge(Theme.of(context).elevatedButtonTheme.style),
       ),
     );
   }
