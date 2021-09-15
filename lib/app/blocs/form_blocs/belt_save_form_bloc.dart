@@ -15,7 +15,8 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
   final locationField = TextFieldBloc();
   final SelectFieldBloc<BeltM, String> beltType =
       SelectFieldBloc(validators: [FieldBlocValidators.required]);
-  final effect1 = InputFieldBloc<EffectModel, String>();
+  final effect1 = InputFieldBloc<EffectModel, String>(
+      validators: [FieldBlocValidators.required]);
   final effect2 = InputFieldBloc<EffectModel, String>();
   final effect3 = InputFieldBloc<EffectModel, String>();
   final effect4 = InputFieldBloc<EffectModel, String>();

@@ -1,16 +1,14 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:belmer/app/blocs/belt_regist_page/belt_regist_page_importer.dart';
 import 'package:belmer/app/blocs/form_blocs/belt_save_form_bloc.dart';
-import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/models/login_model.dart';
 import 'package:belmer/app/repositories/firebase/belts_firebase_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/utils/my_colors.dart';
-import 'package:belmer/app/widgets/components/form_elevated_button.dart';
+import 'package:belmer/app/widgets/components/form_items.dart';
 import 'package:belmer/app/widgets/components/pc/failure_widget.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
 import 'package:belmer/app/widgets/pages/dialog/dqx_progress_dialog.dart';
-import 'package:belmer/app/widgets/pages/dialog/effect_type_select_dialog.dart';
 import 'package:flutter/foundation.dart';
 
 class BeltRegistDialog extends StatelessWidget {
@@ -117,43 +115,43 @@ class BeltRegistDialog extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _MyTextField(
+              UnderlineTextFormField(
                 labelText: "メモ",
                 textFieldBloc: formBloc.memoField,
                 maxLength: 20,
               ),
-              _MyTextField(
+              UnderlineTextFormField(
                 labelText: "倉庫",
                 textFieldBloc: formBloc.locationField,
                 maxLength: 30,
               ),
-              _MyDropDownField(
+              UnderlineDropDownFormField(
                 labelText: "種類",
                 selectFieldBloc: formBloc.beltType,
                 itemBuilder: (context, beltM) => beltM.name,
                 showEmptyItem: false,
               ),
-              _BeltSelectField(
+              EffectSelectFormField(
                 fieldBloc: formBloc.effect1,
                 beltType: formBloc.beltType,
                 labelText: "効果1",
               ),
-              _BeltSelectField(
+              EffectSelectFormField(
                 fieldBloc: formBloc.effect2,
                 beltType: formBloc.beltType,
                 labelText: "効果2",
               ),
-              _BeltSelectField(
+              EffectSelectFormField(
                 fieldBloc: formBloc.effect3,
                 beltType: formBloc.beltType,
                 labelText: "効果3",
               ),
-              _BeltSelectField(
+              EffectSelectFormField(
                 fieldBloc: formBloc.effect4,
                 beltType: formBloc.beltType,
                 labelText: "効果4",
               ),
-              _BeltSelectField(
+              EffectSelectFormField(
                 fieldBloc: formBloc.effect5,
                 beltType: formBloc.beltType,
                 labelText: "効果5",
@@ -258,126 +256,6 @@ class _CancelButton extends StatelessWidget {
             color: Theme.of(context).accentColor,
             width: 1,
           )).merge(Theme.of(context).elevatedButtonTheme.style),
-    );
-  }
-}
-
-class _MyDropDownField extends StatelessWidget {
-  final SelectFieldBloc selectFieldBloc;
-  final bool showEmptyItem;
-  final String labelText;
-  final String Function(BuildContext context, dynamic obj) itemBuilder;
-
-  const _MyDropDownField({
-    Key? key,
-    required this.selectFieldBloc,
-    this.showEmptyItem = true,
-    required this.labelText,
-    required this.itemBuilder,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownFieldBlocBuilder(
-      selectFieldBloc: selectFieldBloc,
-      itemBuilder: itemBuilder,
-      showEmptyItem: showEmptyItem,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: Theme.of(context).textTheme.headline3,
-      ),
-    );
-  }
-}
-
-class _BeltSelectField extends StatelessWidget {
-  final InputFieldBloc<EffectModel, String> fieldBloc;
-  final SelectFieldBloc<BeltM, String> beltType;
-  final String labelText;
-
-  const _BeltSelectField({
-    Key? key,
-    required this.fieldBloc,
-    required this.beltType,
-    required this.labelText,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<InputFieldBloc<EffectModel, String>,
-        InputFieldBlocState<EffectModel, String>>(
-      bloc: fieldBloc,
-      builder: (context, state) {
-        return Container(
-          child: InkWell(
-            child: TextField(
-              controller: TextEditingController(text: state.value?.name),
-              enabled: false,
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.account_tree_rounded),
-                labelText: labelText,
-                labelStyle: Theme.of(context).textTheme.headline3,
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
-                errorText: state.error,
-                errorStyle: TextStyle(color: Theme.of(context).errorColor),
-              ),
-            ),
-            onTap: () => beltType.value == null
-                ? null
-                : EffectTypeSelectDialog.show(
-                    context,
-                    beltM: beltType.value,
-                    onSelect: (e) => fieldBloc.updateValue(e),
-                    selectedEffect: fieldBloc.value,
-                  ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class _MyTextField extends StatelessWidget {
-  final TextFieldBloc textFieldBloc;
-  final String labelText;
-  final int maxLength;
-
-  const _MyTextField({
-    Key? key,
-    required this.textFieldBloc,
-    required this.labelText,
-    required this.maxLength,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFieldBlocBuilder(
-      textFieldBloc: textFieldBloc,
-      maxLength: maxLength,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: Theme.of(context).textTheme.headline3,
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Theme.of(context).accentColor,
-          ),
-        ),
-      ),
-      cursorColor: Theme.of(context).accentColor,
-      buildCounter: (BuildContext context,
-              {int? currentLength, int? maxLength, required bool isFocused}) =>
-          isFocused
-              ? Text(
-                  '$currentLength/$maxLength ',
-                  style: TextStyle(
-                    fontSize: 12.0,
-                  ),
-                )
-              : null,
     );
   }
 }

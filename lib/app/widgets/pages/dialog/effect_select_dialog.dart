@@ -1,10 +1,10 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/form_elevated_button.dart';
+import 'package:belmer/app/widgets/components/form_items.dart';
 import 'package:supercharged/supercharged.dart';
 
-class EffectTypeSelectDialog extends StatefulWidget {
+class EffectSelectDialog extends StatefulWidget {
   final BeltM? _beltM;
   final EffectModel? _selectedEffect;
   final void Function(EffectModel? effectModel)? _onSelect;
@@ -30,7 +30,7 @@ class EffectTypeSelectDialog extends StatefulWidget {
       headerAnimationLoop: false,
       width: 700,
       animType: AnimType.SCALE,
-      body: EffectTypeSelectDialog(
+      body: EffectSelectDialog(
         beltM: beltM,
         onSelect: onSelect,
         selectedEffect: selectedEffect,
@@ -40,7 +40,7 @@ class EffectTypeSelectDialog extends StatefulWidget {
     )..show();
   }
 
-  const EffectTypeSelectDialog({
+  const EffectSelectDialog({
     Key? key,
     BeltM? beltM,
     void Function(EffectModel? effectModel)? onSelect,
@@ -54,7 +54,7 @@ class EffectTypeSelectDialog extends StatefulWidget {
   State<StatefulWidget> createState() => _Widget();
 }
 
-class _Widget extends State<EffectTypeSelectDialog> {
+class _Widget extends State<EffectSelectDialog> {
   final _globalKey = GlobalKey();
 
   @override
