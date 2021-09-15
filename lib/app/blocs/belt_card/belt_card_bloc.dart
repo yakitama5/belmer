@@ -61,7 +61,7 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
       Stream<List<BeltModel>> beltModelsStream) {
     // 列毎の効果一覧をMap形式で取得
     final Map<String?, List<EffectModel>> columnTitleMap =
-        groupBy(allEffects, (item) => item.groupName);
+        groupBy(allEffects, (item) => item.kindName);
 
     // 取得したベルト一覧をテーブル行一覧に変換する
     return beltModelsStream.map((List<BeltModel> belts) {
@@ -78,7 +78,7 @@ class BeltCardBloc extends Bloc<BeltCardEvent, BeltCardState> {
         List<SummaryBeltCellModel?> cells = columnTitleEffects.map((effect) {
           // カラム内の効果一覧を取得
           List<EffectModel>? columnEffectModels =
-              columnTitleMap[effect.groupName];
+              columnTitleMap[effect.kindName];
 
           EffectModel? effectModel = columnEffectModels
               ?.firstWhereOrNull((e) => beltEffectModels.contains(e.id));

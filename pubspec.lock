@@ -217,7 +217,7 @@ packages:
       name: equatable
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.3"
   eva_icons_flutter:
     dependency: "direct main"
     description:
@@ -327,7 +327,7 @@ packages:
       name: flutter_form_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.20.1"
+    version: "0.20.6"
   flutter_hooks:
     dependency: "direct main"
     description:
@@ -386,7 +386,7 @@ packages:
       name: form_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.20.1"
+    version: "0.20.6"
   frontend_server_client:
     dependency: transitive
     description:
@@ -589,7 +589,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   platform:
     dependency: transitive
     description:
@@ -652,7 +652,7 @@ packages:
       name: rxdart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.26.0"
+    version: "0.27.2"
   shelf:
     dependency: transitive
     description:
@@ -722,7 +722,7 @@ packages:
     source: hosted
     version: "1.1.0"
   supercharged:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: supercharged
       url: "https://pub.dartlang.org"

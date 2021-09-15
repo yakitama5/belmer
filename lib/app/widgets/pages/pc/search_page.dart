@@ -96,7 +96,7 @@ class SearchPage extends StatelessWidget {
             child: _SearchCondDropDownField(
               labelText: "効果種類",
               selectFieldBloc: formBloc.effectType,
-              itemBuilder: (context, e) => e.groupName,
+              itemBuilder: (context, e) => e.kindName,
             ),
           ),
           Spacer(flex: 1),

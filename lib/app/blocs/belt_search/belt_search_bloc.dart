@@ -63,7 +63,7 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
     } else if (event.effectGroupName != null) {
       effectIds.addAll(_beltM
           .expand((b) => b.effects)
-          .where((e) => e.groupName == event.effectGroupName)
+          .where((e) => e.kindName == event.effectGroupName)
           .map((e) => e.id)
           .toList());
     }

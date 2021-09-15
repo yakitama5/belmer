@@ -6,7 +6,8 @@ class EffectModel {
   EffectModel({
     required this.id,
     required this.groupName,
-    required this.groupShortName,
+    required this.kindName,
+    required this.kindShortName,
     required this.name,
     required this.value,
     required this.sortKey,
@@ -16,7 +17,8 @@ class EffectModel {
 
   String id;
   String groupName;
-  String groupShortName;
+  String kindName;
+  String kindShortName;
   String name;
   String value;
   int sortKey;

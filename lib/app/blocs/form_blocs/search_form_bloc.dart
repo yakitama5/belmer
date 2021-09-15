@@ -44,7 +44,7 @@ class SearchFormBloc extends FormBloc<String, String> {
       searchBloc.add(BeltSearchEventSearch(
         userId: userId,
         beltType: beltType.value?.id,
-        effectGroupName: effectType.value?.groupName,
+        effectGroupName: effectType.value?.kindName,
         effectId: effectValue.value?.id,
         memo: memoField.value,
         warehouse: locationField.value,
@@ -100,7 +100,7 @@ class SearchFormBloc extends FormBloc<String, String> {
 
     // 絞り込んで返却する
     return selectBelt.effects
-        .where((effect) => effect.groupName == selectValue.groupName)
+        .where((effect) => effect.kindName == selectValue.kindName)
         .toList();
   }
 }

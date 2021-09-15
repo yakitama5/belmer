@@ -39,7 +39,7 @@ class SummaryTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<String> columntTitles =
-        _columnTitleModels.map((e) => e.groupShortName).toList();
+        _columnTitleModels.map((e) => e.kindShortName).toList();
 
     return _SummaryBeltTable(
       columnTitles: columntTitles,
