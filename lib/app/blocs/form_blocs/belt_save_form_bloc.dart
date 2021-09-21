@@ -9,6 +9,7 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
   final String _uid;
   final String? _beltId;
   final BeltsRepository _repository;
+  final DateTime? _createdAt;
 
   // Property
   final memoField = TextFieldBloc();
@@ -48,7 +49,8 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
       BeltModel? beltModel})
       : _uid = uid,
         _beltId = beltId,
-        _repository = repository {
+        _repository = repository,
+        _createdAt = beltModel?.createdAt {
     // 項目定義
     addFieldBlocs(fieldBlocs: [
       memoField,
@@ -139,6 +141,7 @@ class BeltSaveFormBloc extends FormBloc<String, String> {
         effect3: effect3.value?.id,
         effect4: effect4.value?.id,
         effect5: effect5.value?.id,
+        createdAt: _createdAt,
       );
 
       // 保存
