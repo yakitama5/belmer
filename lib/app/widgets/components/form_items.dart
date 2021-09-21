@@ -63,11 +63,6 @@ class EffectSelectFormField extends StatelessWidget {
                 prefixIcon: Icon(Icons.account_tree_rounded),
                 labelText: labelText,
                 labelStyle: Theme.of(context).textTheme.headline3,
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Theme.of(context).accentColor,
-                  ),
-                ),
                 errorText: state.error,
                 errorStyle: TextStyle(color: Theme.of(context).errorColor),
               ),
@@ -143,11 +138,10 @@ class UnderlineTextFormField extends StatelessWidget {
         labelStyle: Theme.of(context).textTheme.headline3,
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
       ),
-      cursorColor: Theme.of(context).accentColor,
       buildCounter: (BuildContext context,
               {int? currentLength, int? maxLength, required bool isFocused}) =>
           isFocused
@@ -158,6 +152,71 @@ class UnderlineTextFormField extends StatelessWidget {
                   ),
                 )
               : null,
+    );
+  }
+}
+
+class BoxTextFormField extends StatelessWidget {
+  final TextFieldBloc textFieldBloc;
+  final String labelText;
+
+  const BoxTextFormField({
+    Key? key,
+    required this.textFieldBloc,
+    required this.labelText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFieldBlocBuilder(
+      textFieldBloc: textFieldBloc,
+      decoration: InputDecoration(
+        labelText: labelText,
+        labelStyle: Theme.of(context).textTheme.headline3,
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+          width: 1,
+          color: Theme.of(context).colorScheme.onPrimary,
+        )),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+          width: 1,
+          color: Theme.of(context).colorScheme.onPrimary,
+        )),
+      ),
+    );
+  }
+}
+
+class BoxDropDownFormField extends StatelessWidget {
+  final SelectFieldBloc selectFieldBloc;
+  final bool showEmptyItem;
+  final String labelText;
+  final String Function(BuildContext context, dynamic obj) itemBuilder;
+
+  const BoxDropDownFormField({
+    Key? key,
+    required this.selectFieldBloc,
+    this.showEmptyItem = true,
+    required this.labelText,
+    required this.itemBuilder,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownFieldBlocBuilder(
+      selectFieldBloc: selectFieldBloc,
+      itemBuilder: itemBuilder,
+      showEmptyItem: showEmptyItem,
+      decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: Theme.of(context).textTheme.headline3,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 1,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
+          )),
     );
   }
 }

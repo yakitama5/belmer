@@ -3,7 +3,6 @@ import 'package:belmer/app/blocs/authentication/auth_importer.dart';
 import 'package:belmer/app/blocs/page_view/page_view_bloc.dart';
 import 'package:belmer/app/blocs/page_view/page_view_event.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/accordion_icon_button.dart';
 import 'package:belmer/app/widgets/components/pc/header_button.dart';
 import 'package:belmer/app/widgets/components/pc/header_icon_button.dart';
 import 'package:belmer/app/widgets/components/pc/logo_text.dart';

@@ -70,7 +70,7 @@ class MobileBasePage extends StatelessWidget {
         children: [
           DrawerHeader(
               decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               child: Container()),
           _HomeMenu(),

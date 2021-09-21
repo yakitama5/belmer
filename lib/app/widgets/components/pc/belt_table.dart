@@ -3,6 +3,7 @@ import 'package:belmer/app/blocs/sort/sort_event.dart';
 import 'package:belmer/app/blocs/sort/sort_state.dart';
 import 'package:belmer/app/models/belt_table_model.dart';
 import 'package:belmer/app/models/belts.dart';
+import 'package:belmer/app/utils/custom_scroll_behavior.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/pc/my_table_components.dart';
 import 'package:belmer/app/widgets/components/pc/scrollable_hint_container.dart';
@@ -81,44 +82,46 @@ class BeltTable extends StatelessWidget {
               ? verticalTitleController.offset
               : 0.0;
 
-          return Container(
-            height: height,
-            width: double.infinity,
-            padding: EdgeInsets.all(10),
-            child: ScrollableHintContainer(
-              showScrollableHint: showScrollableHint,
-              child: StickyHeadersTable(
-                key: key,
-                // スクロール制御
-                scrollControllers: ScrollControllers(
-                  horizontalBodyController: horizontalBodyController,
-                  horizontalTitleController: horizontalTitleController,
-                  verticalBodyController: verticalBodyController,
-                  verticalTitleController: verticalTitleController,
+          return ScrollConfiguration(
+              behavior: CustomScrollBehavior(),
+              child: Container(
+                height: height,
+                width: double.infinity,
+                padding: EdgeInsets.all(10),
+                child: ScrollableHintContainer(
+                  showScrollableHint: showScrollableHint,
+                  child: StickyHeadersTable(
+                    key: key,
+                    // スクロール制御
+                    scrollControllers: ScrollControllers(
+                      horizontalBodyController: horizontalBodyController,
+                      horizontalTitleController: horizontalTitleController,
+                      verticalBodyController: verticalBodyController,
+                      verticalTitleController: verticalTitleController,
+                    ),
+                    initialScrollOffsetX: initialScrollOffsetX,
+                    initialScrollOffsetY: initialScrollOffsetY,
+
+                    // テーブルスタイル設定
+                    columnsLength: columnTitles.length,
+                    rowsLength: rowModels?.length ?? 0,
+                    cellDimensions: cellDimensions,
+
+                    // 各セル生成
+                    legendCell: generetedLegendCell(),
+                    columnsTitleBuilder: (columnIndex) => generetedColumnsTitle(
+                        columnIndex, sortColumnIndex, isReverse),
+                    rowsTitleBuilder: generatedRowsTitle,
+                    contentCellBuilder: generateContentsCell,
+
+                    // イベント定義
+                    onRowTitlePressed: (rowIndex) =>
+                        _onRowTitlePressed(context, rowIndex, rowModels!),
+                    onColumnTitlePressed: (columnIndex) =>
+                        _onColumnTitlePressed(context, columnIndex),
+                  ),
                 ),
-                initialScrollOffsetX: initialScrollOffsetX,
-                initialScrollOffsetY: initialScrollOffsetY,
-
-                // テーブルスタイル設定
-                columnsLength: columnTitles.length,
-                rowsLength: rowModels?.length ?? 0,
-                cellDimensions: cellDimensions,
-
-                // 各セル生成
-                legendCell: generetedLegendCell(),
-                columnsTitleBuilder: (columnIndex) => generetedColumnsTitle(
-                    columnIndex, sortColumnIndex, isReverse),
-                rowsTitleBuilder: generatedRowsTitle,
-                contentCellBuilder: generateContentsCell,
-
-                // イベント定義
-                onRowTitlePressed: (rowIndex) =>
-                    _onRowTitlePressed(context, rowIndex, rowModels!),
-                onColumnTitlePressed: (columnIndex) =>
-                    _onColumnTitlePressed(context, columnIndex),
-              ),
-            ),
-          );
+              ));
         }),
       ),
     );

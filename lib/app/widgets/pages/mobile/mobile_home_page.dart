@@ -57,7 +57,7 @@ class _BeltCard extends StatelessWidget {
   Widget _buildSuccess(BuildContext context, MobileBeltCardStateSuccess state) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-      color: Theme.of(context).accentColor,
+      color: Theme.of(context).colorScheme.secondary,
       child: ExpandablePanel(
         controller: _exController,
         header: Container(
@@ -67,7 +67,7 @@ class _BeltCard extends StatelessWidget {
             title,
             style: TextStyle(
               fontSize: 20,
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).colorScheme.background,
             ),
           ),
         ),
@@ -82,7 +82,7 @@ class _BeltCard extends StatelessWidget {
           ),
         ),
         theme: ExpandableThemeData(
-          iconColor: Theme.of(context).backgroundColor,
+          iconColor: Theme.of(context).colorScheme.background,
           inkWellBorderRadius: BorderRadius.circular(10.0),
         ),
       ),
@@ -104,24 +104,24 @@ class _EffectPanel extends StatelessWidget {
         // borderRadius: BorderRadius.zero,
         borderRadius: BorderRadius.circular(5.0),
         side: BorderSide(
-          color: Theme.of(context).accentColor,
+          color: Theme.of(context).colorScheme.secondary,
           width: 1,
         ),
       ),
-      color: Theme.of(context).secondaryHeaderColor,
+      color: Theme.of(context).colorScheme.secondary,
       child: ExpandablePanel(
         controller: _exController,
         header: Text(
           this.title,
           style: TextStyle(
             fontSize: 18,
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
         collapsed: Container(),
         expanded: Container(),
         theme: ExpandableThemeData(
-          iconColor: Theme.of(context).accentColor,
+          iconColor: Theme.of(context).colorScheme.secondary,
         ),
       ),
     );

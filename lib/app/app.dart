@@ -8,7 +8,6 @@ import 'package:belmer/app/utils/my_colors.dart';
 import 'package:belmer/app/utils/my_fonts.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
 import 'package:belmer/app/widgets/pages/index_page.dart';
-import 'package:belmer/app/widgets/pages/pc/sign_in_page.dart';
 
 class App extends StatelessWidget {
   @override
@@ -79,63 +78,64 @@ class _App extends StatelessWidget {
   /// Build: テーマの生成
   ///
   ThemeData _createThemeData(BuildContext context, AuthState state) {
-    Color _primaryColor;
-    Color _accentColor;
-    Color _secondryColor;
-    Color _onSecondryColor;
-    String _fontFamily;
+    final ThemeData theme = ThemeData();
+    Color primary;
+    Color onPrimary;
+    Color secondary;
+    Color onSecondary;
+    String fontFamily;
 
     if (state is AuthSuccess) {
-      _primaryColor = MyColors.whiteColor;
-      _accentColor = MyColors.primaryColor;
-      _secondryColor = MyColors.secondryColor;
-      _onSecondryColor = MyColors.onSecondryColor;
-      _fontFamily = MyFonts.Kiwi;
+      primary = MyColors.whiteColor;
+      onPrimary = MyColors.primaryColor;
+      secondary = MyColors.secondryColor;
+      onSecondary = MyColors.onSecondryColor;
+      fontFamily = MyFonts.Kiwi;
     } else {
-      _primaryColor = MyColors.primaryColor;
-      _accentColor = MyColors.whiteColor;
-      _secondryColor = MyColors.whiteColor;
-      _onSecondryColor = MyColors.primaryColor;
-      _fontFamily = MyFonts.Meiryo;
+      primary = MyColors.primaryColor;
+      onPrimary = MyColors.whiteColor;
+      secondary = MyColors.whiteColor;
+      onSecondary = MyColors.primaryColor;
+      fontFamily = MyFonts.Meiryo;
     }
 
     return ThemeData(
       // 基本色設定
-      primaryColor: _primaryColor,
-      accentColor: _accentColor,
-      buttonColor: _secondryColor,
-      backgroundColor: _primaryColor,
-      scaffoldBackgroundColor: _primaryColor,
-      secondaryHeaderColor: _secondryColor,
-      dividerColor: _accentColor,
-      indicatorColor: _accentColor,
+      colorScheme: theme.colorScheme.copyWith(
+        primary: primary,
+        onPrimary: onPrimary,
+        secondary: secondary,
+        background: primary,
+      ),
+      scaffoldBackgroundColor: primary,
+      dividerColor: onPrimary,
+      indicatorColor: onPrimary,
 
       // AppBar (スマホでのみ使用)
       appBarTheme: AppBarTheme(
-        backgroundColor: _primaryColor,
+        backgroundColor: primary,
         elevation: 0.0,
         centerTitle: true,
         titleTextStyle: TextStyle(
           fontFamily: MyFonts.Yikes,
-          color: _accentColor,
+          color: onPrimary,
           fontSize: 30,
         ),
       ),
 
-      // アイコンテーマ
       iconTheme: IconThemeData(
-        color: _accentColor,
+        color: onPrimary,
       ),
 
       // ボタンテーマ
       // ElevatedButton
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: _secondryColor,
-          onPrimary: _onSecondryColor,
+          primary: secondary,
+          onPrimary: onSecondary,
           textStyle: TextStyle(
             fontSize: 16,
-            fontFamily: _fontFamily,
+            fontFamily: fontFamily,
           ),
           padding: EdgeInsets.all(5.0),
         ),
@@ -144,18 +144,18 @@ class _App extends StatelessWidget {
       // PC版各種テキストテーマ
       textTheme: TextTheme(
         // 通常テキスト
-        bodyText1: TextStyle(color: _accentColor),
+        bodyText1: TextStyle(color: onPrimary),
 
         // Header Link
         headline1: TextStyle(
-          color: _accentColor,
+          color: onPrimary,
           fontSize: 20,
           fontFamily: MyFonts.Segoe,
         ),
 
         // 入力フォーム内ヘッダー
         headline2: TextStyle(
-          color: _accentColor,
+          color: onPrimary,
           fontSize: 20,
         ),
 
@@ -169,40 +169,43 @@ class _App extends StatelessWidget {
         headline5: TextStyle(
           fontFamily: MyFonts.Yikes,
           fontSize: 30,
-          color: _accentColor,
+          color: onPrimary,
         ),
 
         // Logo Title
         headline6: TextStyle(
           fontFamily: MyFonts.Yikes,
           fontSize: 100,
-          color: _primaryColor,
+          color: primary,
         ),
 
         // 入力フォーム(ドロップダウン)
         subtitle1: TextStyle(
           fontSize: 20,
-          color: _accentColor,
+          color: onPrimary,
         ),
 
         // Sub Title
         subtitle2: TextStyle(
           fontFamily: MyFonts.Yikes,
           fontSize: 20,
-          color: _accentColor,
+          color: onPrimary,
         ),
 
         // Caption
         caption: TextStyle(
-          color: _onSecondryColor,
+          color: onSecondary,
           fontSize: 20,
         ),
       ),
 
-      // スマホ版テキストテーマ
-      accentTextTheme: TextTheme(),
+      textSelectionTheme: theme.textSelectionTheme.copyWith(
+        cursorColor: onPrimary,
+        selectionColor: Colors.grey,
+        selectionHandleColor: Colors.amberAccent,
+      ),
 
-      fontFamily: _fontFamily,
+      fontFamily: fontFamily,
     );
   }
 }

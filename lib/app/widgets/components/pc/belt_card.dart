@@ -44,7 +44,7 @@ class BeltsCard extends StatelessWidget {
               bottom: 10,
             ),
             decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.onPrimary,
               borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
             child: Column(
@@ -71,7 +71,7 @@ class BeltsCard extends StatelessWidget {
           alignment: Alignment.centerLeft,
           padding: EdgeInsets.only(left: 5),
           decoration: BoxDecoration(
-              color: Theme.of(context).secondaryHeaderColor,
+              color: Theme.of(context).colorScheme.secondary,
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -93,7 +93,7 @@ class BeltsCard extends StatelessWidget {
     return TooltipIconButton(
       icon: Icon(
         Icons.add_circle,
-        color: Theme.of(context).primaryColor,
+        color: Theme.of(context).colorScheme.primary,
         size: 40,
       ),
       tooltipMessage: "Add",
@@ -109,7 +109,7 @@ class BeltsCard extends StatelessWidget {
         return FailureWidget();
       }
 
-      return SlimeIndicator(color: Theme.of(context).backgroundColor);
+      return SlimeIndicator(color: Theme.of(context).colorScheme.background);
     });
   }
 
@@ -124,7 +124,8 @@ class BeltsCard extends StatelessWidget {
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SlimeIndicator(color: Theme.of(context).backgroundColor);
+          return SlimeIndicator(
+              color: Theme.of(context).colorScheme.background);
         }
 
         return SummaryTable(

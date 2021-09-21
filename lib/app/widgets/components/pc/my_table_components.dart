@@ -17,7 +17,7 @@ class MyTableHeaderCell extends StatelessWidget {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: MyTableCell(
-        color: Theme.of(context).buttonColor,
+        color: Theme.of(context).colorScheme.secondary,
         child: child,
         showCellBorder: showCellBorder,
       ),

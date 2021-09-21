@@ -8,6 +8,7 @@ import 'package:belmer/app/blocs/search_page/search_page_state.dart';
 import 'package:belmer/app/models/login_model.dart';
 import 'package:belmer/app/repositories/firebase/belts_firebase_repository.dart';
 import 'package:belmer/app/utils/importer.dart';
+import 'package:belmer/app/widgets/components/form_items.dart';
 import 'package:belmer/app/widgets/components/pc/failure_widget.dart';
 import 'package:belmer/app/widgets/components/pc/search_result_table.dart';
 import 'package:belmer/app/widgets/components/slime_indicator.dart';
@@ -84,7 +85,7 @@ class SearchPage extends StatelessWidget {
         children: [
           Flexible(
             flex: 5,
-            child: _SearchCondDropDownField(
+            child: BoxDropDownFormField(
               labelText: "装備",
               selectFieldBloc: formBloc.beltType,
               itemBuilder: (context, e) => e.name,
@@ -93,7 +94,7 @@ class SearchPage extends StatelessWidget {
           Spacer(flex: 1),
           Flexible(
             flex: 7,
-            child: _SearchCondDropDownField(
+            child: BoxDropDownFormField(
               labelText: "効果種類",
               selectFieldBloc: formBloc.effectType,
               itemBuilder: (context, e) => e.kindName,
@@ -102,7 +103,7 @@ class SearchPage extends StatelessWidget {
           Spacer(flex: 1),
           Flexible(
             flex: 3,
-            child: _SearchCondDropDownField(
+            child: BoxDropDownFormField(
               labelText: "効果",
               selectFieldBloc: formBloc.effectValue,
               itemBuilder: (context, e) => e.value,
@@ -130,7 +131,7 @@ class SearchPage extends StatelessWidget {
                 children: [
                   Flexible(
                     flex: 17,
-                    child: _SearchCondTextField(
+                    child: BoxTextFormField(
                       textFieldBloc: formBloc.memoField,
                       labelText: "メモ",
                     ),
@@ -138,7 +139,7 @@ class SearchPage extends StatelessWidget {
                   Spacer(flex: 1),
                   Flexible(
                     flex: 17,
-                    child: _SearchCondTextField(
+                    child: BoxTextFormField(
                       textFieldBloc: formBloc.locationField,
                       labelText: "倉庫",
                     ),
@@ -167,10 +168,10 @@ class SearchPage extends StatelessWidget {
           child: ElevatedButton(
             onPressed: () => formBloc.clear(),
             style: ElevatedButton.styleFrom(
-                primary: Theme.of(context).primaryColor,
-                onPrimary: Theme.of(context).accentColor,
+                primary: Theme.of(context).colorScheme.primary,
+                onPrimary: Theme.of(context).colorScheme.onPrimary,
                 side: BorderSide(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.onPrimary,
                   width: 1,
                 )).merge(Theme.of(context).elevatedButtonTheme.style),
             child: Text("検索条件をクリアする"),
@@ -228,72 +229,6 @@ class SearchPage extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class _SearchCondDropDownField extends StatelessWidget {
-  final SelectFieldBloc selectFieldBloc;
-  final bool showEmptyItem;
-  final String labelText;
-  final String Function(BuildContext context, dynamic obj) itemBuilder;
-
-  const _SearchCondDropDownField({
-    Key? key,
-    required this.selectFieldBloc,
-    this.showEmptyItem = true,
-    required this.labelText,
-    required this.itemBuilder,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DropdownFieldBlocBuilder(
-      selectFieldBloc: selectFieldBloc,
-      itemBuilder: itemBuilder,
-      showEmptyItem: showEmptyItem,
-      decoration: InputDecoration(
-          labelText: labelText,
-          labelStyle: Theme.of(context).textTheme.headline3,
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              width: 1,
-              color: Theme.of(context).accentColor,
-            ),
-          )),
-    );
-  }
-}
-
-class _SearchCondTextField extends StatelessWidget {
-  final TextFieldBloc textFieldBloc;
-  final String labelText;
-
-  const _SearchCondTextField({
-    Key? key,
-    required this.textFieldBloc,
-    required this.labelText,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFieldBlocBuilder(
-      textFieldBloc: textFieldBloc,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: Theme.of(context).textTheme.headline3,
-        focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          width: 1,
-          color: Theme.of(context).accentColor,
-        )),
-        enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-          width: 1,
-          color: Theme.of(context).accentColor,
-        )),
-      ),
-      cursorColor: Theme.of(context).accentColor,
     );
   }
 }

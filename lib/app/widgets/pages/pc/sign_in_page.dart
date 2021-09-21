@@ -14,7 +14,7 @@ class SignInPage extends StatelessWidget {
         SpaceBox(height: 100),
         const _Logo(),
         SpaceBox(height: 20),
-        Text(
+        SelectableText(
           "- Dragon Quest X Belts Manager -",
           style: Theme.of(context).textTheme.subtitle2,
         ),
@@ -36,7 +36,7 @@ class SignInPage extends StatelessWidget {
             style: Theme.of(context).textTheme.bodyText1!,
             child: Column(
               children: [
-                Text(
+                SelectableText(
                   """
 このページで利用している株式会社スクウェア・エニックスを代表とする共同著作者が権利を所有する画像の転載・配布は禁止いたします。
 (C) ARMOR PROJECT/BIRD STUDIO/SQUARE ENIX All Rights Reserved.""",
@@ -111,7 +111,7 @@ class _Logo extends StatelessWidget {
       width: 500,
       height: 250,
       decoration: BoxDecoration(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.onPrimary,
         borderRadius: BorderRadius.all(Radius.circular(40.0)),
       ),
       child: Center(

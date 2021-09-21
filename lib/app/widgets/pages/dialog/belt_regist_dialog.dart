@@ -235,7 +235,7 @@ class _DeleteButton extends StatelessWidget {
       child: Text("削除"),
       style: ElevatedButton.styleFrom(
         primary: MyColors.deleteButtonColor,
-        onPrimary: Theme.of(context).primaryColor,
+        onPrimary: Theme.of(context).colorScheme.primary,
       ).merge(Theme.of(context).elevatedButtonTheme.style),
     );
   }
@@ -250,10 +250,10 @@ class _CancelButton extends StatelessWidget {
       onPressed: () => Navigator.pop(context),
       child: Text("キャンセル"),
       style: ElevatedButton.styleFrom(
-          primary: Theme.of(context).primaryColor,
-          onPrimary: Theme.of(context).accentColor,
+          primary: Theme.of(context).colorScheme.primary,
+          onPrimary: Theme.of(context).colorScheme.onPrimary,
           side: BorderSide(
-            color: Theme.of(context).accentColor,
+            color: Theme.of(context).colorScheme.onPrimary,
             width: 1,
           )).merge(Theme.of(context).elevatedButtonTheme.style),
     );

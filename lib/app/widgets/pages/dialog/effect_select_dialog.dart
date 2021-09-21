@@ -26,7 +26,7 @@ class EffectSelectDialog extends StatefulWidget {
       useRootNavigator: true,
       borderSide: BorderSide(color: Theme.of(context).dividerColor, width: 2),
       dismissOnTouchOutside: true,
-      dialogBackgroundColor: Theme.of(context).backgroundColor,
+      dialogBackgroundColor: Theme.of(context).colorScheme.background,
       headerAnimationLoop: false,
       width: 700,
       animType: AnimType.SCALE,
@@ -117,6 +117,8 @@ class _Widget extends State<EffectSelectDialog> {
                         widget._selectedEffect?.groupName == groupEntry.key,
                     collapsedTextColor: collapasedColor,
                     collapsedIconColor: collapasedColor,
+                    textColor: Theme.of(context).colorScheme.onPrimary,
+                    iconColor: Theme.of(context).colorScheme.onPrimary,
                     children: groupEntry.value.entries.map(
                       (kindEntry) {
                         bool isSelectedKind =
@@ -130,6 +132,8 @@ class _Widget extends State<EffectSelectDialog> {
                             initiallyExpanded: isSelectedKind,
                             collapsedTextColor: collapasedColor,
                             collapsedIconColor: collapasedColor,
+                            textColor: Theme.of(context).colorScheme.onPrimary,
+                            iconColor: Theme.of(context).colorScheme.onPrimary,
                             children: kindEntry.value
                                 .map(
                                   (effect) => Container(
@@ -171,10 +175,10 @@ class _Widget extends State<EffectSelectDialog> {
         onPressed: () => _handleSelect(context, null),
         child: Text("選択クリア"),
         style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).primaryColor,
-            onPrimary: Theme.of(context).accentColor,
+            primary: Theme.of(context).colorScheme.primary,
+            onPrimary: Theme.of(context).colorScheme.onPrimary,
             side: BorderSide(
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.onPrimary,
               width: 1,
             )).merge(Theme.of(context).elevatedButtonTheme.style),
       ),
