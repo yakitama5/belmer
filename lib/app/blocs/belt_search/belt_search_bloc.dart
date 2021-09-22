@@ -57,17 +57,6 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
   Future<List<BeltModel>> select(BeltSearchEventSearch event) async {
     List<BeltModel> beltModels = await _repository.selectByUserId(event.userId);
 
-    List<String?> effectIds = [];
-    if (event.effectId != null) {
-      effectIds.add(event.effectId);
-    } else if (event.effectGroupName != null) {
-      effectIds.addAll(_beltM
-          .expand((b) => b.effects)
-          .where((e) => e.kindName == event.effectGroupName)
-          .map((e) => e.id)
-          .toList());
-    }
-
     return beltModels.where((belt) {
       // 検索条件毎に判定を行う
       // ベルト種類
@@ -82,8 +71,8 @@ class BeltSearchBloc extends Bloc<BeltSearchEvent, BeltSearchState> {
         belt.effect4,
         belt.effect5,
       ];
-      bool isEffectMatch =
-          effectIds.isEmpty || beltEffects.any((e) => effectIds.contains(e));
+      bool isEffectMatch = (event.effectIds?.isEmpty ?? true) ||
+          beltEffects.any((e) => event.effectIds?.contains(e) ?? false);
 
       // メモ
       bool isMemoMatch = event.memo == null || belt.memo!.contains(event.memo!);

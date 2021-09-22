@@ -1,6 +1,7 @@
 import 'package:belmer/app/models/accessory_m.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/pages/dialog/effect_select_dialog.dart';
+import 'package:belmer/app/widgets/pages/dialog/effect_multi_select_tree_view_dialog.dart';
+import 'package:belmer/app/widgets/pages/dialog/effect_select_tree_view_dialog.dart';
 
 ///
 /// 共通：ボタン
@@ -77,11 +78,64 @@ class EffectSelectFormField extends StatelessWidget {
             ),
             onTap: () => beltType.value == null
                 ? null
-                : EffectSelectDialog.show(
+                : EffectSelectTreeViewDialog.show(
                     context,
                     beltM: beltType.value,
                     onSelect: (e) => fieldBloc.updateValue(e),
                     selectedEffect: fieldBloc.value,
+                  ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+///
+/// 効果選択 - 複数選択
+///
+class EffectMultiSelectFormField extends StatelessWidget {
+  final InputFieldBloc<List<EffectModel>, String> fieldBloc;
+  final SelectFieldBloc<BeltM, String> beltType;
+  final String labelText;
+
+  const EffectMultiSelectFormField({
+    Key? key,
+    required this.fieldBloc,
+    required this.beltType,
+    required this.labelText,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<InputFieldBloc<List<EffectModel>, String>,
+        InputFieldBlocState<List<EffectModel>, String>>(
+      bloc: fieldBloc,
+      builder: (context, state) {
+        return Container(
+          child: InkWell(
+            child: TextField(
+              controller: TextEditingController(
+                  text: state.value?.map((e) => e.name).join(",")),
+              enabled: false,
+              decoration: InputDecoration(
+                disabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                  width: 1,
+                  color: Theme.of(context).colorScheme.onPrimary,
+                )),
+                prefixIcon: Icon(Icons.account_tree_rounded),
+                labelText: labelText,
+                labelStyle: Theme.of(context).textTheme.headline3,
+              ),
+            ),
+            onTap: () => beltType.value == null
+                ? null
+                : EffectMultiSelectTreeViewDialog.show(
+                    context,
+                    beltM: beltType.value,
+                    onSelect: (e) => fieldBloc.updateValue(e),
+                    selectedEffects: fieldBloc.value,
                   ),
           ),
         );
@@ -164,6 +218,9 @@ class UnderlineTextFormField extends StatelessWidget {
   }
 }
 
+///
+/// テキストボックス - 枠線
+///
 class BoxTextFormField extends StatelessWidget {
   final TextFieldBloc textFieldBloc;
   final String labelText;
@@ -196,6 +253,9 @@ class BoxTextFormField extends StatelessWidget {
   }
 }
 
+///
+/// ドロップダウン - 枠線
+///
 class BoxDropDownFormField extends StatelessWidget {
   final SelectFieldBloc selectFieldBloc;
   final bool showEmptyItem;

@@ -1,18 +1,19 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:belmer/app/models/accessory_m.dart';
+import 'package:belmer/app/models/effect_tree_node.dart';
 import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/form_items.dart';
 import 'package:supercharged/supercharged.dart';
 
-class EffectSelectDialog extends StatefulWidget {
+class EffectSelectTreeViewDialog extends StatefulWidget {
   final BeltM? _beltM;
   final EffectModel? _selectedEffect;
-  final void Function(EffectModel? effectModel)? _onSelect;
+  final void Function(EffectModel? effect)? _onSelect;
 
   static void show(
     BuildContext context, {
     BeltM? beltM,
-    void Function(EffectModel? effectModel)? onSelect,
+    void Function(EffectModel? effect)? onSelect,
     EffectModel? selectedEffect,
   }) {
     AwesomeDialog(
@@ -30,7 +31,7 @@ class EffectSelectDialog extends StatefulWidget {
       headerAnimationLoop: false,
       width: 700,
       animType: AnimType.SCALE,
-      body: EffectSelectDialog(
+      body: EffectSelectTreeViewDialog(
         beltM: beltM,
         onSelect: onSelect,
         selectedEffect: selectedEffect,
@@ -40,10 +41,10 @@ class EffectSelectDialog extends StatefulWidget {
     )..show();
   }
 
-  const EffectSelectDialog({
+  const EffectSelectTreeViewDialog({
     Key? key,
     BeltM? beltM,
-    void Function(EffectModel? effectModel)? onSelect,
+    void Function(EffectModel? effect)? onSelect,
     EffectModel? selectedEffect,
   })  : _beltM = beltM,
         _onSelect = onSelect,
@@ -54,12 +55,41 @@ class EffectSelectDialog extends StatefulWidget {
   State<StatefulWidget> createState() => _Widget();
 }
 
-class _Widget extends State<EffectSelectDialog> {
+class _Widget extends State<EffectSelectTreeViewDialog> {
   final _globalKey = GlobalKey();
+  List<EffectTreeNode>? _treeNodes;
 
   @override
   void initState() {
     super.initState();
+
+    // 効果の生成
+    Map<String, Map<String, List<EffectModel>>>? effectsMap = widget
+        ._beltM?.effects
+        .groupListsBy((element) => element.groupName)
+        .entries
+        .map((e) => MapEntry<String, Map<String, List<EffectModel>>>(
+            e.key, e.value.groupBy((element) => element.kindName)))
+        .toMap();
+    _treeNodes = effectsMap?.entries
+        .map((g) => EffectTreeNode(
+              dispValue: g.key,
+              selected: g.key == widget._selectedEffect?.groupName,
+              childlen: g.value.entries
+                  .map((k) => EffectTreeNode(
+                        dispValue: k.key,
+                        selected: k.key == widget._selectedEffect?.kindName,
+                        initialDisp: k.key == widget._selectedEffect?.kindName,
+                        childlen: k.value
+                            .map((e) => EffectTreeNode(
+                                  effect: e,
+                                  dispValue: e.name,
+                                ))
+                            .toList(),
+                      ))
+                  .toList(),
+            ))
+        .toList();
 
     // 既に選択済の効果が存在する場合は、表示箇所までスクロール
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
@@ -90,17 +120,7 @@ class _Widget extends State<EffectSelectDialog> {
   }
 
   Widget _buildBody(BuildContext context) {
-    Map<String, Map<String, List<EffectModel>>>? effectsMap = widget
-        ._beltM?.effects
-        .groupListsBy((element) => element.groupName)
-        .entries
-        .map((e) => MapEntry<String, Map<String, List<EffectModel>>>(
-            e.key, e.value.groupBy((element) => element.kindName)))
-        .toMap();
-
-    final Color? collapasedColor = Theme.of(context).textTheme.headline3?.color;
-
-    if (effectsMap == null) {
+    if (_treeNodes == null) {
       return Container();
     }
 
@@ -108,55 +128,39 @@ class _Widget extends State<EffectSelectDialog> {
       height: 550,
       child: SingleChildScrollView(
         child: Column(
-          children: effectsMap.entries
-              .map(
-                (groupEntry) => Container(
-                  child: ExpansionTile(
-                    title: Text(groupEntry.key),
-                    initiallyExpanded:
-                        widget._selectedEffect?.groupName == groupEntry.key,
-                    collapsedTextColor: collapasedColor,
-                    collapsedIconColor: collapasedColor,
-                    textColor: Theme.of(context).colorScheme.onPrimary,
-                    iconColor: Theme.of(context).colorScheme.onPrimary,
-                    children: groupEntry.value.entries.map(
-                      (kindEntry) {
-                        bool isSelectedKind =
-                            widget._selectedEffect?.kindName == kindEntry.key;
-
-                        return Container(
-                          padding: EdgeInsets.only(left: 10),
-                          child: ExpansionTile(
-                            key: isSelectedKind ? _globalKey : null,
-                            title: Text(kindEntry.key),
-                            initiallyExpanded: isSelectedKind,
-                            collapsedTextColor: collapasedColor,
-                            collapsedIconColor: collapasedColor,
-                            textColor: Theme.of(context).colorScheme.onPrimary,
-                            iconColor: Theme.of(context).colorScheme.onPrimary,
-                            children: kindEntry.value
-                                .map(
-                                  (effect) => Container(
-                                    padding: EdgeInsets.only(left: 20),
-                                    child: ListTile(
-                                      title: Text(effect.value),
-                                      leading: Icon(Icons.add),
-                                      onTap: () =>
-                                          _handleSelect(context, effect),
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                        );
-                      },
-                    ).toList(),
-                  ),
-                ),
-              )
-              .toList(),
+          children:
+              _treeNodes?.map((e) => _buildTreeNode(context, e)).toList() ?? [],
         ),
       ),
+    );
+  }
+
+  Widget _buildTreeNode(BuildContext context, EffectTreeNode treeNode) {
+    Widget parentWidget = ExpansionTile(
+      key: treeNode.initialDisp ? _globalKey : null,
+      title: Text(treeNode.dispValue),
+      initiallyExpanded: treeNode.selected ?? false,
+      collapsedTextColor: Theme.of(context).textTheme.headline3?.color,
+      collapsedIconColor: Theme.of(context).textTheme.headline3?.color,
+      textColor: Theme.of(context).colorScheme.onPrimary,
+      iconColor: Theme.of(context).colorScheme.onPrimary,
+      children: treeNode.childlen
+              ?.map((child) => Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: _buildTreeNode(context, child),
+                  ))
+              .toList() ??
+          [],
+    );
+
+    Widget childWidget = ListTile(
+      title: Text(treeNode.dispValue),
+      leading: Icon(Icons.add),
+      onTap: () => _handleSelect(context, treeNode.effect),
+    );
+
+    return Container(
+      child: treeNode.childlen != null ? parentWidget : childWidget,
     );
   }
 

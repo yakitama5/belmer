@@ -93,20 +93,11 @@ class SearchPage extends StatelessWidget {
           ),
           Spacer(flex: 1),
           Flexible(
-            flex: 7,
-            child: BoxDropDownFormField(
+            flex: 11,
+            child: EffectMultiSelectFormField(
               labelText: "効果種類",
-              selectFieldBloc: formBloc.effectType,
-              itemBuilder: (context, e) => e.kindName,
-            ),
-          ),
-          Spacer(flex: 1),
-          Flexible(
-            flex: 3,
-            child: BoxDropDownFormField(
-              labelText: "効果",
-              selectFieldBloc: formBloc.effectValue,
-              itemBuilder: (context, e) => e.value,
+              beltType: formBloc.beltType,
+              fieldBloc: formBloc.effects,
             ),
           ),
         ],
