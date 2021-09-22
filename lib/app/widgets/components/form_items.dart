@@ -52,7 +52,14 @@ class EffectSelectFormField extends StatelessWidget {
         InputFieldBlocState<EffectModel, String>>(
       bloc: fieldBloc,
       builder: (context, state) {
-        // TODO 必須エラー時のエラーメッセージをここで設定しないといけない
+        // カスタムフィールドのため、エラーメッセージを設定
+        String? error = state.isInitial ? null : state.error;
+        bool hasError = error != null;
+        if (hasError && error.contains("Required")) {
+          error = "選択して下さい";
+        }
+
+        final Color errorColor = Theme.of(context).colorScheme.error;
 
         return Container(
           child: InkWell(
@@ -60,12 +67,13 @@ class EffectSelectFormField extends StatelessWidget {
               controller: TextEditingController(text: state.value?.name),
               enabled: false,
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.account_tree_rounded),
-                labelText: labelText,
-                labelStyle: Theme.of(context).textTheme.headline3,
-                errorText: state.error,
-                errorStyle: TextStyle(color: Theme.of(context).errorColor),
-              ),
+                  prefixIcon: Icon(Icons.account_tree_rounded),
+                  labelText: labelText,
+                  labelStyle: Theme.of(context).textTheme.headline3,
+                  errorText: error,
+                  errorStyle: TextStyle(color: errorColor),
+                  errorBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: errorColor))),
             ),
             onTap: () => beltType.value == null
                 ? null

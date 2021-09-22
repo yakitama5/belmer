@@ -27,10 +27,12 @@ class BeltsFirebaseRepository extends BeltsRepository {
 
     if (belt.id == null) {
       // 登録して、登録したIDを保持
-      DocumentReference addedDoc = await beltsCol.add(
-          belt.toJson()..addAll({'createdAt': FieldValue.serverTimestamp()}));
+      DocumentReference addedDoc = await beltsCol.add(belt.toJson());
 
-      return addedDoc.update({'id': addedDoc.id});
+      return addedDoc.update({
+        'id': addedDoc.id,
+        'createdAt': FieldValue.serverTimestamp(),
+      });
     } else {
       // 更新(登録後の場合はID項目を設定)
       return beltsCol.doc(belt.id).update(belt.toJson());
