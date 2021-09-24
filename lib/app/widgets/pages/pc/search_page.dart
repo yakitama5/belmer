@@ -87,7 +87,7 @@ class SearchPage extends StatelessWidget {
             flex: 5,
             child: BoxDropDownFormField(
               labelText: "装備",
-              selectFieldBloc: formBloc.beltType,
+              selectFieldBloc: formBloc.beltField,
               itemBuilder: (context, e) => e.name,
             ),
           ),
@@ -96,8 +96,8 @@ class SearchPage extends StatelessWidget {
             flex: 11,
             child: EffectMultiSelectFormField(
               labelText: "効果種類",
-              beltType: formBloc.beltType,
-              fieldBloc: formBloc.effects,
+              beltType: formBloc.beltField,
+              fieldBloc: formBloc.effectsField,
             ),
           ),
         ],
