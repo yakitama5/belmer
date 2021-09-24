@@ -38,35 +38,35 @@ class BasePage extends StatelessWidget {
         ),
       ),
       // TODO Drawerとボタン共通化してえ・・・・
-      endDrawer: Drawer(
-        child: ListView(
-          children: [
-            _DrawerItem(
-              title: "Home",
-              iconData: Icons.home,
-              onTap: () =>
-                  context.read<PageViewBloc>().add(PageViewEventHome()),
-            ),
-            _DrawerItem(
-              title: "Search",
-              iconData: Icons.search,
-              onTap: () =>
-                  context.read<PageViewBloc>().add(PageViewEventSearch()),
-            ),
-            _DrawerItem(
-              title: "Info",
-              iconData: Icons.info,
-              onTap: () => InfoDialog.show(context),
-            ),
-            _DrawerItem(
-              title: "Logout",
-              iconData: Icons.logout,
-              onTap: () => context.read<AuthBloc>().add(SignOut()),
-            ),
-          ],
-        ),
-      ),
-      drawerEdgeDragWidth: 0,
+      // endDrawer: Drawer(
+      //   child: ListView(
+      //     children: [
+      //       _DrawerItem(
+      //         title: "Home",
+      //         iconData: Icons.home,
+      //         onTap: () =>
+      //             context.read<PageViewBloc>().add(PageViewEventHome()),
+      //       ),
+      //       _DrawerItem(
+      //         title: "Search",
+      //         iconData: Icons.search,
+      //         onTap: () =>
+      //             context.read<PageViewBloc>().add(PageViewEventSearch()),
+      //       ),
+      //       _DrawerItem(
+      //         title: "Info",
+      //         iconData: Icons.info,
+      //         onTap: () => InfoDialog.show(context),
+      //       ),
+      //       _DrawerItem(
+      //         title: "Logout",
+      //         iconData: Icons.logout,
+      //         onTap: () => context.read<AuthBloc>().add(SignOut()),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      // drawerEdgeDragWidth: 0,
     );
   }
 }
@@ -123,14 +123,15 @@ class _Header extends StatelessWidget {
           );
         }
 
-        // 画面幅に合わせて省略する
-        return LayoutBuilder(builder: (context, constraiants) {
-          if (ResponsiveWidget.isSmallScreen(context)) {
-            return _buildRightHeaderMenu(context, items);
-          } else {
-            return _buildRightHeaderAllItems(context, items);
-          }
-        });
+        return _buildRightHeaderAllItems(context, items);
+        // TODO: 画面幅に合わせて省略する
+        // return LayoutBuilder(builder: (context, constraiants) {
+        //   if (ResponsiveWidget.isSmallScreen(context)) {
+        //     return _buildRightHeaderMenu(context, items);
+        //   } else {
+        //     return _buildRightHeaderAllItems(context, items);
+        //   }
+        // });
       },
     );
   }
