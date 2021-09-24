@@ -1,9 +1,6 @@
 import 'package:belmer/app/blocs/authentication/auth_importer.dart';
 import 'package:belmer/app/utils/importer.dart';
-import 'package:belmer/app/widgets/components/responsive_widget.dart';
 import 'package:belmer/app/widgets/pages/dialog/dqx_progress_dialog.dart';
-import 'package:belmer/app/widgets/pages/mobile/mobile_base_page.dart';
-import 'package:belmer/app/widgets/pages/mobile/mobile_sign_in_page.dart';
 import 'package:belmer/app/widgets/pages/pc/base_page.dart';
 import 'package:belmer/app/widgets/pages/pc/sign_in_page.dart';
 
@@ -22,15 +19,19 @@ class IndexPage extends StatelessWidget {
             DqxProgressDialog.hide(context);
           }
         },
-        child: ResponsiveWidget(
-          largeScreen: BasePage(
-            child: const SignInPage(),
-          ),
-          smallScreen: MobileBasePage(
-            title: "Login",
-            child: const MobileSignInPage(),
-          ),
+        child: BasePage(
+          child: const SignInPage(),
         ),
+        // TODO スマホ版はレイアウト決まってから
+        // child: ResponsiveWidget(
+        //   largeScreen: BasePage(
+        //     child: const SignInPage(),
+        //   ),
+        //   smallScreen: MobileBasePage(
+        //     title: "Login",
+        //     child: const MobileSignInPage(),
+        //   ),
+        // ),
       ),
     );
   }

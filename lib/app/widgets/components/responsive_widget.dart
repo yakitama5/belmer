@@ -33,6 +33,7 @@ class ResponsiveWidget extends StatelessWidget {
       } else if (constraints.maxWidth > 800) {
         return midiumScreen ?? largeScreen;
       } else {
+        print("ここに来てない？");
         return smallScreen ?? midiumScreen ?? largeScreen;
       }
     });
