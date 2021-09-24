@@ -109,7 +109,7 @@ class _Header extends StatelessWidget {
               "Info",
               Icons.info,
               () => InfoDialog.show(context),
-            )
+            ),
           ];
         }
 
@@ -142,16 +142,21 @@ class _Header extends StatelessWidget {
   }
 
   Widget _buildRightHeaderMenu(BuildContext context, List<_HeaderItem> items) {
-    return PopupMenuButton(
+    return PopupMenuButton<_HeaderItem>(
         icon: Icon(Icons.menu),
         iconSize: 30,
+        color: Theme.of(context).colorScheme.primary,
+        // なぜかonTapではなく、onSelectdじゃないとダイアログ画面が立ち上がらない
+        // Notes: https://stackoverflow.com/questions/68241703/flutter-dialog-not-working-from-popupmenuitem-tap
+        onSelected: (item) => item.onTap(),
         itemBuilder: (BuildContext context) => items
             .map(
               (item) => PopupMenuItem(
                 child: Row(
                   children: [Icon(item.iconData), Text(item.label)],
                 ),
-                onTap: item.onTap,
+                value: item,
+                // onTap: item.onTap,
                 textStyle: Theme.of(context).textTheme.headline1,
               ),
             )
