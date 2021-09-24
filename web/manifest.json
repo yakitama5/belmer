@@ -1,10 +1,10 @@
 {
-    "name": "belmer",
-    "short_name": "belmer",
+    "name": "Belmer",
+    "short_name": "Belmer",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
+    "background_color": "#A37F60",
+    "theme_color": "#A37F60",
     "description": "エンジョイ勢からガチ勢まで。ドラクエ10のおいしい情報をお届けします！(DQXベルト管理用ファンサイト)",
     "orientation": "portrait-primary",
     "prefer_related_applications": false
