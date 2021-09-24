@@ -114,7 +114,7 @@ class _Header extends StatelessWidget {
         }
 
         return LayoutBuilder(builder: (context, constraiants) {
-          if (ResponsiveWidget.isSmallScreen(context)) {
+          if (ResponsiveWidget.isMobileScreen(context)) {
             return _buildRightHeaderMenu(context, headerItems);
           } else {
             return _buildRightHeaderAllItems(context, headerItems);
