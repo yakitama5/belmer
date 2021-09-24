@@ -18,7 +18,7 @@ class InfoDialog extends StatelessWidget {
       useRootNavigator: true,
       borderSide: BorderSide(color: Theme.of(context).dividerColor, width: 2),
       dismissOnTouchOutside: true,
-      dialogBackgroundColor: Theme.of(context).backgroundColor,
+      dialogBackgroundColor: Theme.of(context).colorScheme.background,
       headerAnimationLoop: false,
       width: 800,
       animType: AnimType.SCALE,
@@ -38,12 +38,12 @@ class InfoDialog extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("""
+            SelectableText("""
 このサイトはドラクエ10用ベルト装備を管理するためのファンサイトです。
 推奨ブラウザや使用方法については以下の説明をご参照下さい。
         """),
             _H1Text("■ブラウザ環境について"),
-            Text("当サイトは、以下の環境でご使用いただくことを推奨いたします。"),
+            SelectableText("当サイトは、以下の環境でご使用いただくことを推奨いたします。"),
             SpaceBox(height: 10),
             _H2Text("Windows"),
             ItemizedText([
@@ -59,7 +59,7 @@ class InfoDialog extends StatelessWidget {
             ]),
             SpaceBox(height: 15),
             _H1Text("■ご意見・ご要望について"),
-            Text("当サイトに対するご意見・ご要望につきましては、以下にお願いします。"),
+            SelectableText("当サイトに対するご意見・ご要望につきましては、以下にお願いします。"),
             ItemizedText([
               Text("Githubの当リポジトリに対するissue発行"),
               Text("TwitterのDM機能"),
@@ -76,7 +76,7 @@ class _H1Text extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       text,
       style: TextStyle(
         fontSize: 20,
@@ -94,7 +94,7 @@ class _H2Text extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return SelectableText(
       text,
       style: TextStyle(
         fontSize: 16,

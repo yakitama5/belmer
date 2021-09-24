@@ -17,6 +17,9 @@ BeltModel _$BeltModelFromJson(Map<String, dynamic> json) {
     effect3: json['effect3'] as String?,
     effect4: json['effect4'] as String?,
     effect5: json['effect5'] as String?,
+    createdAt: json['createdAt'] == null
+        ? null
+        : (json['createdAt'] as Timestamp).toDate(),
   );
 }
 
@@ -30,4 +33,7 @@ Map<String, dynamic> _$BeltModelToJson(BeltModel instance) => <String, dynamic>{
       'effect3': instance.effect3,
       'effect4': instance.effect4,
       'effect5': instance.effect5,
+      'createdAt': instance.createdAt == null
+          ? null
+          : Timestamp.fromDate(instance.createdAt!),
     };

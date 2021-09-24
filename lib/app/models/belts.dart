@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'belts.g.dart';
 
@@ -13,6 +14,7 @@ class BeltModel {
     this.effect3,
     this.effect4,
     this.effect5,
+    this.createdAt,
   });
 
   String? id;
@@ -24,6 +26,7 @@ class BeltModel {
   String? effect3;
   String? effect4;
   String? effect5;
+  DateTime? createdAt;
 
   factory BeltModel.fromJson(Map<String, dynamic> json) =>
       _$BeltModelFromJson(json);

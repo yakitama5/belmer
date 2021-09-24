@@ -21,8 +21,8 @@ dependencies:
   flutter_bloc: ^7.0.0
 
   ## form_bloc
-  form_bloc: ^0.20.1
-  flutter_form_bloc: 0.20.1
+  form_bloc: ^0.20.6
+  flutter_form_bloc: ^0.20.6
 
   ## Firebase
   firebase_core: ^1.1.1
@@ -65,6 +65,7 @@ dependencies:
 
   # Collection
   collection: ^1.15.0
+  supercharged: ^2.0.0
 
   # Fonts
   google_fonts: ^2.1.0
@@ -80,13 +81,13 @@ flutter:
   fonts:
     - family: Yikes
       fonts:
-        - asset: assets/fonts/Yikes_medium.ttf
+        - asset: assets/fonts/Yikes.ttf
     - family: Kiwi Maru
       fonts:
-        - asset: assets/fonts/KiwiMaru-Regular.ttf
+        - asset: assets/fonts/KiwiMaru-subset.ttf
     - family: Meiryo
       fonts:
-        - asset: assets/fonts/MEIRYO.TTC
+        - asset: assets/fonts/メイリオ-subset.ttc
     - family: MyIcon
       fonts:
         - asset: assets/icon/MyFlutterIcon.ttf

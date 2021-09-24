@@ -10,7 +10,8 @@ EffectModel _$EffectModelFromJson(Map<String, dynamic> json) {
   return EffectModel(
     id: json['id'] as String,
     groupName: json['groupName'] as String,
-    groupShortName: json['groupShortName'] as String,
+    kindName: json['kindName'] as String,
+    kindShortName: json['kindShortName'] as String,
     name: json['name'] as String,
     value: json['value'] as String,
     sortKey: json['sortKey'] as int,
@@ -23,7 +24,8 @@ Map<String, dynamic> _$EffectModelToJson(EffectModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'groupName': instance.groupName,
-      'groupShortName': instance.groupShortName,
+      'kindName': instance.kindName,
+      'kindShortName': instance.kindShortName,
       'name': instance.name,
       'value': instance.value,
       'sortKey': instance.sortKey,

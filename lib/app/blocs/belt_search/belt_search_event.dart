@@ -8,16 +8,14 @@ class BeltSearchEvent extends Equatable {
 class BeltSearchEventSearch extends BeltSearchEvent {
   final String? userId;
   final String? beltType;
-  final String? effectGroupName;
-  final String? effectId;
+  final List<String>? effectIds;
   final String? memo;
   final String? warehouse;
 
   BeltSearchEventSearch({
     required this.userId,
     this.beltType,
-    this.effectGroupName,
-    this.effectId,
+    this.effectIds,
     this.memo,
     this.warehouse,
   });

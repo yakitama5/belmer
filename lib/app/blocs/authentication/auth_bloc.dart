@@ -23,7 +23,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     } else if (event is SignInWithTwitter) {
       yield* _signInWithTwitter(event);
     } else if (event is SignInMailAndPassword) {
-    } else if (event is LoggedOut) {
+    } else if (event is SignOut) {
       yield* _loggedOut(event);
     }
   }
@@ -91,7 +91,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ///
   /// Event: ログアウト
   ///
-  Stream<AuthState> _loggedOut(LoggedOut event) async* {
+  Stream<AuthState> _loggedOut(SignOut event) async* {
     yield AuthStatePure();
     await _repository.signOut();
     yield NotAuth();
