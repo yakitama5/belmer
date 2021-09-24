@@ -6,6 +6,7 @@ import 'package:belmer/app/utils/importer.dart';
 import 'package:belmer/app/widgets/components/pc/header_button.dart';
 import 'package:belmer/app/widgets/components/pc/header_icon_button.dart';
 import 'package:belmer/app/widgets/components/pc/logo_text.dart';
+import 'package:belmer/app/widgets/components/responsive_widget.dart';
 import 'package:belmer/app/widgets/components/space_box.dart';
 import 'package:belmer/app/widgets/pages/dialog/info_dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -36,6 +37,36 @@ class BasePage extends StatelessWidget {
           ),
         ),
       ),
+      // TODO Drawerとボタン共通化してえ・・・・
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            _DrawerItem(
+              title: "Home",
+              iconData: Icons.home,
+              onTap: () =>
+                  context.read<PageViewBloc>().add(PageViewEventHome()),
+            ),
+            _DrawerItem(
+              title: "Search",
+              iconData: Icons.search,
+              onTap: () =>
+                  context.read<PageViewBloc>().add(PageViewEventSearch()),
+            ),
+            _DrawerItem(
+              title: "Info",
+              iconData: Icons.info,
+              onTap: () => InfoDialog.show(context),
+            ),
+            _DrawerItem(
+              title: "Logout",
+              iconData: Icons.logout,
+              onTap: () => context.read<AuthBloc>().add(SignOut()),
+            ),
+          ],
+        ),
+      ),
+      drawerEdgeDragWidth: 0,
     );
   }
 }
@@ -82,11 +113,8 @@ class _Header extends StatelessWidget {
         if (state is AuthSuccess) {
           items.addAll([
             _buildHomeButton(context),
-            SpaceBox(width: 20),
             _buildSearchButton(context),
-            SpaceBox(width: 20),
             _buildInfoButton(context),
-            SpaceBox(width: 20),
             _buildLogoutButton(context),
           ]);
         } else {
@@ -95,11 +123,31 @@ class _Header extends StatelessWidget {
           );
         }
 
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: items,
-        );
+        // 画面幅に合わせて省略する
+        return LayoutBuilder(builder: (context, constraiants) {
+          if (ResponsiveWidget.isSmallScreen(context)) {
+            return _buildRightHeaderMenu(context, items);
+          } else {
+            return _buildRightHeaderAllItems(context, items);
+          }
+        });
       },
+    );
+  }
+
+  Widget _buildRightHeaderAllItems(BuildContext context, List<Widget> items) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children:
+          items.map((e) => [e, SpaceBox(width: 20)]).expand((e) => e).toList(),
+    );
+  }
+
+  Widget _buildRightHeaderMenu(BuildContext context, List<Widget> items) {
+    return TooltipIconButton(
+      icon: Icon(Icons.menu),
+      tooltipMessage: "Menu",
+      onTap: () => Scaffold.of(context).openEndDrawer(),
     );
   }
 
@@ -200,6 +248,50 @@ class _TwitterIconButton extends StatelessWidget {
           await launch(TWITTER_PAGE_URL);
         }
       },
+    );
+  }
+}
+
+class _DrawerItem extends StatelessWidget {
+  final IconData? iconData;
+  final String title;
+  final void Function()? onTap;
+
+  const _DrawerItem({
+    Key? key,
+    this.iconData,
+    required this.title,
+    this.onTap,
+  }) : super(key: key);
+
+  void handleOnTap(BuildContext context) {
+    if (onTap != null) {
+      Navigator.pop(context);
+      onTap!();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: ListTile(
+        title: Row(
+          children: [
+            if (iconData != null)
+              Icon(
+                this.iconData,
+                size: 30,
+              ),
+            SpaceBox(width: 10),
+            Text(
+              this.title,
+              style: Theme.of(context).textTheme.headline1,
+            ),
+          ],
+        ),
+        onTap: () => handleOnTap(context),
+      ),
     );
   }
 }

@@ -12,10 +12,8 @@ import 'package:belmer/app/widgets/pages/pc/test_page.dart';
 class LogedInRouterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ResponsiveWidget(
-      largeScreen: const _PcScreen(),
-      smallScreen: const _MobileScreen(),
-    );
+    // TODO スマホ版はレイアウト決まってから
+    return const _PcScreen();
   }
 }
 
