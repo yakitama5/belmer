@@ -22,7 +22,6 @@ class EffectSelectTreeViewDialog extends StatefulWidget {
         top: 20,
         left: 30,
         right: 30,
-        bottom: 0,
       ),
       useRootNavigator: true,
       borderSide: BorderSide(color: Theme.of(context).dividerColor, width: 2),
@@ -167,7 +166,6 @@ class _Widget extends State<EffectSelectTreeViewDialog> {
   Widget _buildFooter(BuildContext context) {
     return Container(
       width: double.infinity,
-      // constraints: BoxConstraints(maxHeight: 70),
       padding: EdgeInsets.only(top: 15, bottom: 15),
       decoration: BoxDecoration(
         border: Border(

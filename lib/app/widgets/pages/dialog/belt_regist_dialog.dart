@@ -30,7 +30,6 @@ class BeltRegistDialog extends StatelessWidget {
         top: 20,
         left: 10,
         right: 10,
-        bottom: 10,
       ),
       useRootNavigator: true,
       borderSide: BorderSide(color: Theme.of(context).dividerColor, width: 2),
@@ -165,18 +164,18 @@ class BeltRegistDialog extends StatelessWidget {
 
   Widget _buildFooterItems(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 200),
-      padding: EdgeInsets.only(top: 10, bottom: 10),
+      width: double.infinity,
+      padding: EdgeInsets.only(top: 15, bottom: 15),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(color: Theme.of(context).dividerColor),
         ),
       ),
+      alignment: Alignment.center,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           _CancelButton(),
-          // 「削除」ボタンは更新時のみ表示
           if (this.beltId != null) _DeleteButton(),
           _SubmitButton(),
         ],
