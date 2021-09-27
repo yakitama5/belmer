@@ -118,6 +118,7 @@ class EffectMultiSelectFormField extends StatelessWidget {
               controller: TextEditingController(
                   text: state.value?.map((e) => e.name).join(",")),
               enabled: false,
+              // style: TextStyle(overflow: TextOverflow.ellipsis),
               decoration: InputDecoration(
                 disabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(

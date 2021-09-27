@@ -78,30 +78,29 @@ class SearchPage extends StatelessWidget {
   Widget _buildAlwaysSearchCond(BuildContext context) {
     final formBloc = context.read<SearchFormBloc>();
 
-    return ConstrainedBox(
-      constraints: BoxConstraints(maxWidth: 800),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            flex: 5,
-            child: BoxDropDownFormField(
-              labelText: "装備",
-              selectFieldBloc: formBloc.beltField,
-              itemBuilder: (context, e) => e.name,
-            ),
+    return Wrap(
+      alignment: WrapAlignment.center,
+      direction: Axis.horizontal,
+      crossAxisAlignment: WrapCrossAlignment.center,
+      children: [
+        Container(
+          constraints: BoxConstraints(maxWidth: 250, minWidth: 200),
+          child: BoxDropDownFormField(
+            labelText: "装備",
+            selectFieldBloc: formBloc.beltField,
+            itemBuilder: (context, e) => e.name,
           ),
-          Spacer(flex: 1),
-          Flexible(
-            flex: 11,
-            child: EffectMultiSelectFormField(
-              labelText: "効果種類",
-              beltType: formBloc.beltField,
-              fieldBloc: formBloc.effectsField,
-            ),
+        ),
+        SpaceBox(width: 20),
+        Container(
+          constraints: BoxConstraints(maxWidth: 500, minWidth: 400),
+          child: EffectMultiSelectFormField(
+            labelText: "効果種類",
+            beltType: formBloc.beltField,
+            fieldBloc: formBloc.effectsField,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -117,19 +116,21 @@ class SearchPage extends StatelessWidget {
           expanded: Column(
             children: [
               SpaceBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              Wrap(
+                alignment: WrapAlignment.center,
+                direction: Axis.horizontal,
+                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  Flexible(
-                    flex: 17,
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 500, minWidth: 400),
                     child: BoxTextFormField(
                       textFieldBloc: formBloc.memoField,
                       labelText: "メモ",
                     ),
                   ),
-                  Spacer(flex: 1),
-                  Flexible(
-                    flex: 17,
+                  SpaceBox(width: 20),
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 500, minWidth: 400),
                     child: BoxTextFormField(
                       textFieldBloc: formBloc.locationField,
                       labelText: "倉庫",
